@@ -1,2 +1,8 @@
 .DS_Store
 .vscode
+
+project/project/
+project/target/
+target/
+dist/
+logs/

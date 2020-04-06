@@ -1,0 +1,14 @@
+@(title: String)(content: Html)
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>@title</title>
+    <link href="@routes.Assets.versioned("main.css")" rel="stylesheet" type="text/css" media="screen" />
+    <link href="@routes.Assets.versioned("favicon.ico")" rel="shortcut icon" type="image/ico" />
+  </head>
+  <body>
+    @content
+    <script src="@routes.Assets.versioned("main.js")" type="text/javascript" />
+  </body>
+</html>
