@@ -1,0 +1,50 @@
+* {
+  font-family: -apple-system, BlinkMacSystemFont, "Roboto", "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+}
+
+body, h1, h2, h3, h4, h5, h6, p {
+  margin: 0;
+}
+
+a {
+  color: #4187ff;
+}
+
+.content {
+  min-height: 100vh;
+}
+
+.stackshare_heavy {
+  font-weight: 600;
+}
+
+.stackshare_light {
+  font-weight: 200;
+}
+
+.error_header {
+  padding: 0.5rem 0 0 1rem;
+}
+
+.error_block {
+  text-align: center;
+  margin-top: -2rem;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 100%;
+}
+
+.error_code {
+  font-size: 5rem;
+}
+
+.error_message {
+  font-size: 1.75rem;
+  font-weight: 300;
+  margin-top: 0.5rem;
+}
+
+.error_text {
+  margin-top: 0.5rem;
+}

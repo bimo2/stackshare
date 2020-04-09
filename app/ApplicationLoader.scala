@@ -18,6 +18,8 @@ class Stackshare(context: Context) extends BuiltInComponentsFromContext(context)
   with HttpFiltersComponents 
   with AssetsComponents {
 
+  override lazy val httpErrorHandler = new ApplicationErrorHandler()
+
   lazy val controller = new Controller(controllerComponents)
   lazy val router = new Routes(httpErrorHandler, controller, assets)
 }
