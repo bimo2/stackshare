@@ -1,22 +1,9 @@
 @(status: Int)
 
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <title>Oooo...</title>
-  <link href="@routes.Assets.versioned("main.css")" rel="stylesheet" type="text/css" media="screen" />
-  <link href="@routes.Assets.versioned("favicon.ico")" rel="shortcut icon" type="image/ico" />
-</head>
-<body>
-  <div class="content">
-    <header class="error_header">
-      <h1 class="stackshare_heavy"><span class="stackshare_light">stack</span>share</h1>
-    </header>
-    <div class="error_block">
-      <h1 class="error_code">@status</h1>
-      <h2 class="error_message">Your request failed successfully!</h2>
-      <p class="error_text">Sorry, we're still learning Scala. <a href="/">Back to stackshare.</a></p>
-    </div>
+@main("Oooo...") {
+  <div class="error_block">
+    <h1 class="error_code">@status</h1>
+    <h2 class="error_message">Your request failed successfully!</h2>
+    <p class="error_text">Sorry, we're still learning Scala. <a href="/">Back to stackshare.</a></p>
   </div>
-</body>
-</html>
+}

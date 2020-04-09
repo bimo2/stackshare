@@ -8,10 +8,28 @@ body, h1, h2, h3, h4, h5, h6, p {
 
 a {
   color: #4187ff;
+  text-decoration: none;
+}
+
+header {
+  background: rgba(255, 255, 255, 0.94);
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.25);
+  padding: 0.6rem 0 0.8rem 0;
+  position: fixed;
+  top: 0;
+  width: 100%;
+  z-index: 1000;
+}
+
+.frame {
+  margin: auto;
+  max-width: 1200px;
+  padding: 0 1rem;
 }
 
 .content {
-  min-height: 100vh;
+  min-height: calc(100vh - 122px);
+  padding-top: 90px;
 }
 
 .stackshare_heavy {
@@ -22,8 +40,10 @@ a {
   font-weight: 200;
 }
 
-.error_header {
-  padding: 0.5rem 0 0 1rem;
+.copyright {
+  font-size: 0.85rem;
+  font-weight: 300;
+  padding: 0.5rem;
 }
 
 .error_block {
