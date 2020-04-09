@@ -1,4 +1,4 @@
-import io.bimo2.stackshare.Controller
+import io.bimo2.stackshare.IndexController
 
 import controllers.AssetsComponents
 import play.api.ApplicationLoader.Context
@@ -20,6 +20,6 @@ class Stackshare(context: Context) extends BuiltInComponentsFromContext(context)
 
   override lazy val httpErrorHandler = new ApplicationErrorHandler()
 
-  lazy val controller = new Controller(controllerComponents)
-  lazy val router = new Routes(httpErrorHandler, controller, assets)
+  lazy val indexController = new IndexController(controllerComponents)
+  lazy val router = new Routes(httpErrorHandler, indexController, assets)
 }

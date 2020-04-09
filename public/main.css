@@ -24,12 +24,12 @@ header {
 .frame {
   margin: auto;
   max-width: 1200px;
-  padding: 0 1rem;
+  padding: 0 1.25rem;
 }
 
 .content {
-  min-height: calc(100vh - 122px);
-  padding-top: 90px;
+  min-height: calc(100vh - 142px);
+  padding: 90px 0 20px 0;
 }
 
 .stackshare_heavy {
@@ -44,27 +44,42 @@ header {
   font-size: 0.85rem;
   font-weight: 300;
   padding: 0.5rem;
+  text-align: center;
 }
 
-.error_block {
-  text-align: center;
+.index_block {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.index_block, .error_block {
   margin-top: -2rem;
+  max-width: 1200px;
   position: absolute;
+  text-align: center;
   top: 50%;
   transform: translateY(-50%);
-  width: 100%;
+  width: calc(100% - 2.5rem);
 }
 
-.error_code {
+.index_block a {
+  color: #000000;
+}
+
+.index_value, .error_code {
   font-size: 5rem;
+}
+
+.index_key {
+  font-size: 1.75rem;
+  font-weight: 300;
 }
 
 .error_message {
   font-size: 1.75rem;
   font-weight: 300;
-  margin-top: 0.5rem;
 }
 
-.error_text {
+.error_message, .error_text {
   margin-top: 0.5rem;
 }

@@ -11,6 +11,14 @@ object NoSQLService {
   private val database = client.getDatabase("stackshare")
   private val timeout = 10.seconds
 
+  def getMetrics(): (Long, Long, Long) = {
+    val usersMetric = Await.result(users().countDocuments().toFuture(), timeout)
+    val positionsMetric = Await.result(positions().countDocuments().toFuture(), timeout)
+    val companiesMetric = Await.result(companies().countDocuments().toFuture(), timeout)
+
+    (usersMetric, positionsMetric, companiesMetric)
+  }
+
   def destroy(): Unit = {
     Await.result(users().drop().toFuture(), timeout)
     Await.result(positions().drop().toFuture(), timeout)
