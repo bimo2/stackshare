@@ -68,6 +68,7 @@ header {
 
 .index_value, .error_code {
   font-size: 5rem;
+  font-weight: 800;
 }
 
 .index_key {
