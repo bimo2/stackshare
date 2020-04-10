@@ -11,7 +11,22 @@
     <div class="content">
       <header>
         <div class="frame">
-          <h1 class="stackshare_heavy"><span class="stackshare_light">stack</span>share</h1>
+          <h1 class="stackshare"><a href="/"><span class="stackshare_light">stack</span>share</a></h1>
+          <form class="search">
+            <input type="text" placeholder="URL or query" />
+            <button>Search</button>
+          </form>
+          <div class="links">
+            <nav>
+              <a href="/companies"><img src="@routes.Assets.versioned("companies.svg")" alt="companies" /></a>
+            </nav>
+            <nav class="nav_mid">
+              <a href="/positions"><img src="@routes.Assets.versioned("positions.svg")" alt="positions" /></a>
+            </nav>
+            <nav>
+              <a href="/users"><img src="@routes.Assets.versioned("users.svg")" alt="users" /></a>
+            </nav>
+          </div>
         </div>
       </header>
       <div class="frame">
