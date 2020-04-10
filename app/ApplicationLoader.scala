@@ -21,6 +21,14 @@ class Stackshare(context: Context) extends BuiltInComponentsFromContext(context)
   override lazy val httpErrorHandler = new ApplicationErrorHandler()
 
   lazy val indexController = new IndexController(controllerComponents)
+  lazy val usersController = new UsersController(controllerComponents)
   lazy val errorController = new ErrorController(controllerComponents)
-  lazy val router = new Routes(httpErrorHandler, indexController, errorController, assets)
+
+  lazy val router = new Routes(
+    httpErrorHandler,
+    indexController,
+    usersController,
+    errorController,
+    assets
+  )
 }

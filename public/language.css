@@ -1,0 +1,82 @@
+:root {
+  --js: rgb(240, 234, 58);
+  --swift: rgb(245, 142, 69);
+  --go: rgb(81, 193, 245);
+  --rb: rgb(150, 0, 30);
+  --py: rgb(8, 99, 135);
+  --scala: rgb(237, 7, 54);
+  --java: rgb(196, 0, 0);
+  --kt: rgb(255, 167, 59);
+  --cpp: rgb(8, 95, 201);
+  --m: rgb(57, 143, 247);
+  --cs: rgb(154, 7, 222);
+  --php: rgb(164, 130, 255);
+  --sql: rgb(169, 169, 169);
+
+  --track: -1212px 0 0 1200px;
+}
+
+#js_range::-webkit-slider-thumb {
+  background: var(--js);
+  box-shadow: var(--track) var(--js);
+}
+
+#swift_range::-webkit-slider-thumb {
+  background: var(--swift);
+  box-shadow: var(--track) var(--swift);
+}
+
+#go_range::-webkit-slider-thumb {
+  background: var(--go);
+  box-shadow: var(--track) var(--go);
+}
+
+#rb_range::-webkit-slider-thumb {
+  background: var(--rb);
+  box-shadow: var(--track) var(--rb);
+}
+
+#py_range::-webkit-slider-thumb {
+  background: var(--py);
+  box-shadow: var(--track) var(--py);
+}
+
+#scala_range::-webkit-slider-thumb {
+  background: var(--scala);
+  box-shadow: var(--track) var(--scala);
+}
+
+#java_range::-webkit-slider-thumb {
+  background: var(--java);
+  box-shadow: var(--track) var(--java);
+}
+
+#kt_range::-webkit-slider-thumb {
+  background: var(--kt);
+  box-shadow: var(--track) var(--kt);
+}
+
+#cpp_range::-webkit-slider-thumb {
+  background: var(--cpp);
+  box-shadow: var(--track) var(--cpp);
+}
+
+#m_range::-webkit-slider-thumb {
+  background: var(--m);
+  box-shadow: var(--track) var(--m);
+}
+
+#cs_range::-webkit-slider-thumb {
+  background: var(--cs);
+  box-shadow: var(--track) var(--cs);
+}
+
+#php_range::-webkit-slider-thumb {
+  background: var(--php);
+  box-shadow: var(--track) var(--php);
+}
+
+#sql_range::-webkit-slider-thumb {
+  background: var(--sql);
+  box-shadow: var(--track) var(--sql);
+}

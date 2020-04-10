@@ -11,20 +11,59 @@ a {
   text-decoration: none;
 }
 
-input[type=text] {
-  background: rgba(0, 0, 0, 0.1);
+button, input[type=text] {
   border: 0;
   border-radius: 0.25rem;
   font-size: 1.15rem;
   font-weight: 300;
-  outline: none;
   padding: 0.42rem 0.85rem;
-  transition: 0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
+}
+
+button {
+  background: rgba(0, 0, 0, 0.85);
+  color: #ffffff;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover {
+  background: #000000;
+}
+
+label {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin: 0 0 0.25rem 0.25rem;
+}
+
+input {
+  background: rgba(0, 0, 0, 0.1);
+  margin: 0;
+  outline: none;
+  width: calc(100% - 1.75rem);
+}
+
+input:focus {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+input[type=range], input[type=range]::-webkit-slider-thumb {
+  border-radius: 1.5rem;
+  height: 20px;
+  -webkit-appearance: none;
+}
+
+input[type=range] {
+  background: transparent;
+  overflow: hidden;
   width: 100%;
 }
 
-input[type=text]:focus {
-  background: rgba(0, 0, 0, 0.15);
+input[type=range]::-webkit-slider-thumb {
+  cursor: pointer;
+  width: 20px;
 }
 
 header {
@@ -45,7 +84,7 @@ header > .frame {
 .frame {
   margin: auto;
   max-width: 1200px;
-  padding: 0 1.25rem;
+  padding: 0 1.5rem;
 }
 
 .search {
@@ -59,11 +98,8 @@ header > .frame {
 
 .search button {
   background: transparent;
-  border: 0;
-  cursor: pointer;
-  font-size: 1.15rem;
+  font-weight: 400;
   margin-left: 1rem;
-  outline: none;
   padding: 0;
 }
 
@@ -83,20 +119,44 @@ header > .frame {
 }
 
 .content {
-  min-height: calc(100vh - 142px);
-  padding: 90px 0 20px 0;
+  min-height: calc(100vh - 167px);
+  padding: 90px 0 45px 0;
 }
 
 .stackshare {
   font-weight: 600;
 }
 
-.stackshare a, .index_block a {
+.stackshare a, .search button, .index_block a {
   color: #000000;
 }
 
 .stackshare_light {
   font-weight: 200;
+}
+
+.card {
+  border-radius: 0.25rem;
+  box-shadow: 0 1px 4px 0 rgba(0, 0, 0, 0.15);
+  padding: 1.75rem 1.5rem;
+}
+
+.form {
+  margin: auto;
+  max-width: 400px;
+}
+
+.form h1 {
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+.form button {
+  width: 100%;
+}
+
+.form_next {
+  margin-top: 1rem;
 }
 
 .copyright {
