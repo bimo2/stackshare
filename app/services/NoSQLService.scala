@@ -29,9 +29,15 @@ object NoSQLService {
     database.createCollection("companies")
   }
 
-  private def users(): MongoCollection[Document] = database.getCollection("users")
+  private def users(): MongoCollection[Document] = {
+    database.getCollection("users")
+  }
 
-  private def positions(): MongoCollection[Document] = database.getCollection("positions")
+  private def positions(): MongoCollection[Document] = {
+    database.getCollection("positions")
+  }
 
-  private def companies(): MongoCollection[Document] = database.getCollection("companies")
+  private def companies(): MongoCollection[Document] = {
+    database.getCollection("companies")
+  }
 }

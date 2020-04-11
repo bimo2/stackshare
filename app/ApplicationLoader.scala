@@ -7,9 +7,9 @@ import router.Routes
 
 import play.api._
 
-class StackshareApplicationLoader extends ApplicationLoader {
+class StackshareApplicationLoader() extends ApplicationLoader {
 
-  def load(context: Context) = {
+  def load(context: Context): Application = {
     new Stackshare(context).application
   }
 }

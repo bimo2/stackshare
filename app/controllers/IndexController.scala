@@ -1,33 +1,37 @@
 package io.bimo2.stackshare
 
-import play.api.mvc._
 import play.api.libs.json._
+import play.api.mvc._
 
-class IndexController (val controllerComponents: ControllerComponents) extends BaseController {
+class IndexController(val controllerComponents: ControllerComponents) extends BaseController {
 
-  def index() = Action { implicit request: Request[AnyContent] =>
+  def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     try {
       val metrics = NoSQLService.getMetrics()
 
       Ok(views.html.index(metrics))
     }
     catch {
-      case any: Throwable => InternalServerError(views.html.error(500))
+      case e: Exception => {
+        InternalServerError(views.html.error(500))
+      }
     }
   }
 
-  def destroy() = Action { implicit request: Request[AnyContent] =>
+  def destroy(): Action[JsValue] = Action(parse.json) { implicit request: Request[JsValue] =>
     try {
       NoSQLService.destroy()
-      val json = Json.toJson(DefaultResponse(200))
+      val message = Message(200)
+      val response = Json.toJson(message)
 
-      Ok(json)
+      Ok(response)
     }
     catch {
-      case any: Throwable => {
-        val json = Json.toJson(DefaultResponse(500))
+      case e: Exception => {
+        val message = Message(500, e.getMessage())
+        val response = Json.toJson(message)
 
-        InternalServerError(json)
+        InternalServerError(response)
       }
     }
   }
