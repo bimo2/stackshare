@@ -119,8 +119,8 @@ header > .frame {
 }
 
 .content {
-  min-height: calc(100vh - 167px);
-  padding: 90px 0 45px 0;
+  min-height: calc(100vh - 177px);
+  padding: 100px 0 45px 0;
 }
 
 .stackshare {

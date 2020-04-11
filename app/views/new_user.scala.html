@@ -3,33 +3,34 @@
 @main("New User") {
   <form class="form card">
     <h1>New User</h1>
-    <input id="username" type="text" placeholder="username" autocomplete="username" />
-    <label class="form_next" for="js_range">JavaScript &rarr; <span>0</span></label>
-    <input id="js_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="swift_range">Swift &rarr; <span>0</span></label>
-    <input id="swift_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="go_range">Go &rarr; <span>0</span></label>
-    <input id="go_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="rb_range">Ruby &rarr; <span>0</span></label>
-    <input id="rb_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="py_range">Python &rarr; <span>0</span></label>
-    <input id="py_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="scala_range">Scala &rarr; <span>0</span></label>
-    <input id="scala_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="java_range">Java &rarr; <span>0</span></label>
-    <input id="java_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="kt_range">Kotlin &rarr; <span>0</span></label>
-    <input id="kt_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="cpp_range">C++ &rarr; <span>0</span></label>
-    <input id="cpp_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="m_range">Objective-C &rarr; <span>0</span></label>
-    <input id="m_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="cs_range">C# &rarr; <span>0</span></label>
-    <input id="cs_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="php_range">PHP &rarr; <span>0</span></label>
-    <input id="php_range" type="range" min="0" max="10" value="0" />
-    <label class="form_next" for="sql_range">SQL &rarr; <span>0</span></label>
-    <input id="sql_range" type="range" min="0" max="10" value="0" />
-    <button class="form_next">Create User</button>
+    <label>Username</label>
+    <input type="text" name="username" placeholder="bimo2" autocomplete="off" />
+    <label class="form_next">JavaScript</label>
+    <input class="js" type="range" name="attributes" min="0" max="10" value="0" data-lang="js" />
+    <label class="form_next">Swift</label>
+    <input class="swift" type="range" name="attributes" min="0" max="10" value="0" data-lang="swift" />
+    <label class="form_next">Go</label>
+    <input class="go" type="range" name="attributes" min="0" max="10" value="0" data-lang="go" />
+    <label class="form_next">Ruby</label>
+    <input class="rb" type="range" name="attributes" min="0" max="10" value="0" data-lang="rb" />
+    <label class="form_next">Python</label>
+    <input class="py" type="range" name="attributes" min="0" max="10" value="0" data-lang="py" />
+    <label class="form_next">Scala</label>
+    <input class="scala" type="range" name="attributes" min="0" max="10" value="0" data-lang="scala" />
+    <label class="form_next">Java</label>
+    <input class="java" type="range" name="attributes" min="0" max="10" value="0" data-lang="java" />
+    <label class="form_next">Kotlin</label>
+    <input class="kt" type="range" name="attributes" min="0" max="10" value="0" data-lang="kt" />
+    <label class="form_next">C++</label>
+    <input class="cpp" type="range" name="attributes" min="0" max="10" value="0" data-lang="cpp" />
+    <label class="form_next">Objective-C</label>
+    <input class="m" type="range" name="attributes" min="0" max="10" value="0" data-lang="m" />
+    <label class="form_next">C#</label>
+    <input class="cs" type="range" name="attributes" min="0" max="10" value="0" data-lang="cs" />
+    <label class="form_next">PHP</label>
+    <input class="php" type="range" name="attributes" min="0" max="10" value="0" data-lang="php" />
+    <label class="form_next">SQL</label>
+    <input class="sql" type="range" name="attributes" min="0" max="10" value="0" data-lang="sql" />
+    <button id="create_user_button" class="form_next" type="button" onclick="onCreateUser()">Create User</button>
   </form>
 }

@@ -16,67 +16,67 @@
   --track: -1212px 0 0 1200px;
 }
 
-#js_range::-webkit-slider-thumb {
+input[type=range].js::-webkit-slider-thumb {
   background: var(--js);
   box-shadow: var(--track) var(--js);
 }
 
-#swift_range::-webkit-slider-thumb {
+input[type=range].swift::-webkit-slider-thumb {
   background: var(--swift);
   box-shadow: var(--track) var(--swift);
 }
 
-#go_range::-webkit-slider-thumb {
+input[type=range].go::-webkit-slider-thumb {
   background: var(--go);
   box-shadow: var(--track) var(--go);
 }
 
-#rb_range::-webkit-slider-thumb {
+input[type=range].rb::-webkit-slider-thumb {
   background: var(--rb);
   box-shadow: var(--track) var(--rb);
 }
 
-#py_range::-webkit-slider-thumb {
+input[type=range].py::-webkit-slider-thumb {
   background: var(--py);
   box-shadow: var(--track) var(--py);
 }
 
-#scala_range::-webkit-slider-thumb {
+input[type=range].scala::-webkit-slider-thumb {
   background: var(--scala);
   box-shadow: var(--track) var(--scala);
 }
 
-#java_range::-webkit-slider-thumb {
+input[type=range].java::-webkit-slider-thumb {
   background: var(--java);
   box-shadow: var(--track) var(--java);
 }
 
-#kt_range::-webkit-slider-thumb {
+input[type=range].kt::-webkit-slider-thumb {
   background: var(--kt);
   box-shadow: var(--track) var(--kt);
 }
 
-#cpp_range::-webkit-slider-thumb {
+input[type=range].cpp::-webkit-slider-thumb {
   background: var(--cpp);
   box-shadow: var(--track) var(--cpp);
 }
 
-#m_range::-webkit-slider-thumb {
+input[type=range].m::-webkit-slider-thumb {
   background: var(--m);
   box-shadow: var(--track) var(--m);
 }
 
-#cs_range::-webkit-slider-thumb {
+input[type=range].cs::-webkit-slider-thumb {
   background: var(--cs);
   box-shadow: var(--track) var(--cs);
 }
 
-#php_range::-webkit-slider-thumb {
+input[type=range].php::-webkit-slider-thumb {
   background: var(--php);
   box-shadow: var(--track) var(--php);
 }
 
-#sql_range::-webkit-slider-thumb {
+input[type=range].sql::-webkit-slider-thumb {
   background: var(--sql);
   box-shadow: var(--track) var(--sql);
 }
