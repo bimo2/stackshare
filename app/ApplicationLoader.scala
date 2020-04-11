@@ -2,19 +2,23 @@ import io.bimo2.stackshare._
 
 import controllers.AssetsComponents
 import play.api.ApplicationLoader.Context
+import play.api.mvc.EssentialFilter
+import play.filters.csrf.CSRFFilter
 import play.filters.HttpFiltersComponents
 import router.Routes
 
 import play.api._
 
-class StackshareApplicationLoader() extends ApplicationLoader {
+class StackshareApplicationLoader()
+  extends ApplicationLoader {
 
   def load(context: Context): Application = {
     new Stackshare(context).application
   }
 }
 
-class Stackshare(context: Context) extends BuiltInComponentsFromContext(context) 
+class Stackshare(context: Context)
+  extends BuiltInComponentsFromContext(context) 
   with HttpFiltersComponents 
   with AssetsComponents {
 
@@ -31,4 +35,8 @@ class Stackshare(context: Context) extends BuiltInComponentsFromContext(context)
     errorController,
     assets
   )
+
+  override def httpFilters: Seq[EssentialFilter] = {
+    super.httpFilters.filterNot(_.getClass == classOf[CSRFFilter])
+  }
 }

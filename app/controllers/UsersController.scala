@@ -3,7 +3,8 @@ package io.bimo2.stackshare
 import play.api.libs.json._
 import play.api.mvc._
 
-class UsersController(val controllerComponents: ControllerComponents) extends BaseController {
+class UsersController(val controllerComponents: ControllerComponents)
+  extends BaseController {
 
   def add(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     Ok(views.html.new_user())

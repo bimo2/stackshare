@@ -3,7 +3,8 @@ package io.bimo2.stackshare
 import play.api.libs.json._
 import play.api.mvc._
 
-class IndexController(val controllerComponents: ControllerComponents) extends BaseController {
+class IndexController(val controllerComponents: ControllerComponents)
+  extends BaseController {
 
   def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     try {
