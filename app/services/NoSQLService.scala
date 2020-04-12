@@ -5,6 +5,8 @@ import scala.concurrent.Await
 
 import org.mongodb.scala._
 import org.mongodb.scala.model._
+import org.mongodb.scala.model.Filters._
+import org.mongodb.scala.model.Sorts._
 import scala.concurrent.duration._
 
 trait NoSQLModel[A] {
@@ -12,6 +14,8 @@ trait NoSQLModel[A] {
   def toNoSQL(model: A): Document
   def toModel(document: Document): A
 }
+
+case class NotFoundException(message: String) extends Exception(message)
 
 object NoSQLService {
 
@@ -31,17 +35,25 @@ object NoSQLService {
     val _id = new ObjectId(user.id.getOrElse(new ObjectId().toString()))
     val document = User.toNoSQL(user)
     val filter = Document("_id" -> _id)
-    val options = UpdateOptions().upsert(true)
+    val options = ReplaceOptions().upsert(true)
 
     Await.result(users().replaceOne(filter, document, options).toFuture(), timeout)
   }
 
   def findUsers(): Vector[User] = {
-    val documents = Await.result(users().find().toFuture(), timeout)
+    val sort = ascending("username")
+    val documents = Await.result(users().find().sort(sort).toFuture(), timeout)
 
-    Vector[User]() ++ documents.map { user =>
-      User.toModel(user)
+    Vector[User]() ++ documents.map { document =>
+      User.toModel(document)
     }
+  }
+
+  def findUser(id: String): User = {
+    val query = equal("username", id)
+    val documents = Await.result(users().find(query).toFuture(), timeout)
+
+    User.toModel(documents.head)
   }
 
   def destroy(): Unit = {

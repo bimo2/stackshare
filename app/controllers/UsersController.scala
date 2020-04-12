@@ -19,20 +19,37 @@ class UsersController(val controllerComponents: ControllerComponents)
         }
 
         val userAttributes = user.attributes.toSeq.sortWith(_._2 > _._2)
-
         user.attributes = ListMap(userAttributes: _*).filter(_._2 > 0).take(3)
       }
 
-      val averages = attributes.transform((key, value) => {
+      val averagesMap = attributes.transform((key, value) => {
         value / users.length
       })
 
-      val averagesSequence = averages.toSeq.sortWith(_._2 > _._2)
-      val averagesVector = Vector(averagesSequence: _*).filter(_._2 > 0)
+      val averagesSequence = averagesMap.toSeq.sortWith(_._2 > _._2)
+      val averages = Vector(averagesSequence: _*).filter(_._2 > 0)
 
-      Ok(views.html.users(users, averagesVector));
+      Ok(views.html.users(users, averages));
     }
     catch {
+      case e: Exception => {
+        InternalServerError(views.html.error(500))
+      }
+    }
+  }
+
+  def show(id: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    try {
+      val user = NoSQLService.findUser(id)
+      val score = user.attributes.foldLeft(0)(_+_._2)
+
+      Ok(views.html.user(user, score))
+    }
+    catch {
+      case e: NoSuchElementException => {
+        NotFound(views.html.error(404))
+      }
+
       case e: Exception => {
         InternalServerError(views.html.error(500))
       }
