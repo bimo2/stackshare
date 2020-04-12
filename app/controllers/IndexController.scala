@@ -14,7 +14,7 @@ class IndexController(val controllerComponents: ControllerComponents)
     }
     catch {
       case e: Exception => {
-        InternalServerError(views.html.error(500))
+        InternalServerError(views.html.error(500, e.getMessage()))
       }
     }
   }

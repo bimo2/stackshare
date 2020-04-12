@@ -6,6 +6,8 @@ class ErrorController(val controllerComponents: ControllerComponents)
   extends BaseController {
 
   def show(status: Int): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
-    Status(status)(views.html.error(status))
+    val message = Errors.defaultMessage(status)
+
+    Status(status)(views.html.error(status, message))
   }
 }

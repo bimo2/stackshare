@@ -13,10 +13,11 @@ const isOk = (response) => {
 
 const onCreateUser = async () => {
   const attributeNodes = document.getElementsByName('attributes');
+  const username = document.getElementsByName('username')[0].value.toLowerCase();
   const attributes = Array.from(attributeNodes);
 
   const data = {
-    username: document.getElementsByName('username')[0].value || undefined,
+    username: username || undefined,
     attributes: Object.assign(...attributes.map((attribute) => {
       const score = parseInt(attribute.value);
 

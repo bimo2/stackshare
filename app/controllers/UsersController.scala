@@ -33,7 +33,7 @@ class UsersController(val controllerComponents: ControllerComponents)
     }
     catch {
       case e: Exception => {
-        InternalServerError(views.html.error(500))
+        InternalServerError(views.html.error(500, e.getMessage()))
       }
     }
   }
@@ -47,11 +47,11 @@ class UsersController(val controllerComponents: ControllerComponents)
     }
     catch {
       case e: NoSuchElementException => {
-        NotFound(views.html.error(404))
+        NotFound(views.html.error(404, e.getMessage()))
       }
 
       case e: Exception => {
-        InternalServerError(views.html.error(500))
+        InternalServerError(views.html.error(500, e.getMessage()))
       }
     }
   }
