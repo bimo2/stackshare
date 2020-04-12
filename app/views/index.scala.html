@@ -1,18 +1,18 @@
 @(metrics: (Long, Long, Long))
 
 @main("Home") {
-  <div class="index_block">
+  <div class="focus invisible_links">
     <a href="/companies">
-      <h1 class="index_value">@metrics._3</h1>
-      <h2 class="index_key">companies</h2>
+      <h1 class="dd">@metrics._3</h1>
+      <h2 class="dd">companies</h2>
     </a>
     <a href="/positions">
-      <h1 class="index_value">@metrics._2</h1>
-      <h2 class="index_key">positions</h2>
+      <h1 class="dd">@metrics._2</h1>
+      <h2 class="dd">positions</h2>
     </a>
     <a href="/users">
-      <h1 class="index_value">@metrics._1</h1>
-      <h2 class="index_key">users</h2>
+      <h1 class="dd">@metrics._1</h1>
+      <h2 class="dd">users</h2>
     </a>
   </div>
 }

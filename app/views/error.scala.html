@@ -1,9 +1,12 @@
-@(status: Int)
+@(status: Int, message: String)
 
 @main(s"$status") {
-  <div class="error_block">
-    <h1 class="error_code">@status</h1>
-    <h2 class="error_message">Your request failed successfully!</h2>
-    <p class="error_text">Sorry, we're still learning Scala. <a href="/">Back to stackshare.</a></p>
+  <div class="focus">
+    <div>
+      <h1 class="dd">@status</h1>
+      <h2 class="dd less_space_above">Your request failed successfully!</h2>
+      <p class="less_space_above">Sorry, we're still learning Scala. <a href="/">Back to stackshare.</a></p>
+      <p class="error_trace more_space_above">@message</p>
+    </div>
   </div>
 }

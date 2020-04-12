@@ -1,9 +1,9 @@
 @()
 
 @main("New User") {
-  <form class="form card">
+  <form class="create card">
     <h1>New User</h1>
-    <label class="more_space_above">Username</label>
+    <label class="space_above">Username</label>
     <input type="text" name="username" placeholder="bimo2" autocomplete="off" />
     <label class="space_above">JavaScript</label>
     <input class="js" type="range" name="attributes" min="0" max="10" value="0" data-lang="js" />
@@ -31,6 +31,6 @@
     <input class="php" type="range" name="attributes" min="0" max="10" value="0" data-lang="php" />
     <label class="space_above">SQL</label>
     <input class="sql" type="range" name="attributes" min="0" max="10" value="0" data-lang="sql" />
-    <button id="create_user_button" class="space_above" type="button" onclick="onCreateUser()">Create User</button>
+    <button class="space_above" type="button" onclick="onCreateUser()">Create User</button>
   </form>
 }
