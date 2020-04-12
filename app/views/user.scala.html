@@ -1,12 +1,21 @@
 @import io.bimo2.stackshare.User
 @import io.bimo2.stackshare.Language
 
-@(user: User, score: Int)
+@(user: User)
 
 @main(s"${user.username}") {
   <div class="card">
-    <h1 class="title">@user.username</h1>
-    <h1 class="metric_value">44</h1>
-    <h2 class="metric_key">Attribute Score</h2>
+    <div class="action_bar">
+      <h1>@user.username</h1>
+      <button>Delete User</button>
+    </div>
+    <div class="barchart space_above">
+      @for((key, value) <- user.attributes) {
+        <div class="bar" style="width: calc(@{value * 10}%);">
+          @Language.mapping(key) &rarr; @value
+          <div class="@key" style="width: 100%;"></div>
+        </div>
+      }
+    </div>
   </div>
 }

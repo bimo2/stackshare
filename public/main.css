@@ -51,7 +51,7 @@ input:focus {
   background: rgba(0, 0, 0, 0.15);
 }
 
-input[type=range], input[type=range]::-webkit-slider-thumb {
+input[type=range], input[type=range]::-webkit-slider-thumb, .bar > div {
   border-radius: 1.5rem;
   height: 20px;
   -webkit-appearance: none;
@@ -125,6 +125,7 @@ body, h1, h2, h3, h4, h5, h6, p {
 /* TABLES */
 
 table {
+  margin-top: -1.5rem;
   width: 100%;
 }
 
@@ -132,6 +133,11 @@ td {
   font-size: 0.95rem;
   font-weight: 300;
   padding-top: 1.5rem;
+}
+
+.without_data {
+  font-weight: 300;
+  text-align: center;
 }
 
 /* TEXT */
@@ -162,6 +168,12 @@ h2.dd {
   padding: 1.75rem 1.5rem;
 }
 
+.action_bar {
+  align-items: center;
+  display: flex;
+  justify-content: space-between;
+}
+
 .attribute_list {
   display: flex;
   flex-wrap: wrap;
@@ -185,6 +197,24 @@ h2.dd {
   height: 16px;
   margin: 0 0.45rem;
   width: 16px;
+}
+
+.barchart {
+  margin-bottom: -0.75rem;
+}
+
+.bar {
+  font-size: 0.9rem;
+  font-weight: 300;
+  margin: 0.75rem 0;
+  overflow: show;
+  text-align: center;
+  white-space: nowrap;
+}
+
+.bar > div {
+  height: 20px;
+  margin-top: 0.2rem;
 }
 
 /* SINGLE USE */

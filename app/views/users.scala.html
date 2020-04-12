@@ -5,8 +5,13 @@
 
 @main("Users") {
   <div class="card">
-    <h1>Users</h1>
-    <h2 class="space_above">Average User Attributes</h2>
+    <div class="action_bar">
+      <h1>Users</h1>
+      <div><a class="" href="/users/new"><button>New User</button></a></div>
+    </div>
+    @if(users.length > 0) {
+      <h2 class="space_above">Average User Attributes</h2>
+    }
     <div class="attribute_list less_space_above">
       @for((key, value) <- averages) {
         <div class="circle"><span class="@key"></span>@Language.mapping(key) &rarr; @{f"$value%.2f"}</div>
@@ -14,19 +19,24 @@
     </div>
   </div>
   <div class="card more_space_above">
-    <a href="/users/new"><button>New User</button></a>
-    <table >
-        @for(user <- users) {
-          <tr>
-            <td>@user.id</td>
-            <td><a href="/users/@user.username">@user.username</a></td>
-            @for((key, value) <- user.attributes) {
-              <td>
-                <div class="circle"><span class="@key"></span>@Language.mapping(key) &rarr; @value</div>
-              </td>
-            }
-          </tr>
-        }
-    </table>
+    @if(users.length > 0) {
+      <table>
+        <tbody>
+          @for(user <- users) {
+            <tr>
+              <td>@user.id</td>
+              <td><a href="/users/@user.username">@user.username</a></td>
+              @for((key, value) <- user.attributes) {
+                <td>
+                  <div class="circle"><span class="@key"></span>@Language.mapping(key) &rarr; @value</div>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    } else {
+      <div class="without_data">No users.</div>
+    }
   </div>
 }
