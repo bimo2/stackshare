@@ -10,7 +10,7 @@ import scala.concurrent.duration._
 trait NoSQLModel[A] {
 
   def toNoSQL(model: A): Document
-  // def toModel(document: Document): A
+  def toModel(document: Document): A
 }
 
 object NoSQLService {
@@ -34,6 +34,14 @@ object NoSQLService {
     val options = UpdateOptions().upsert(true)
 
     Await.result(users().replaceOne(filter, document, options).toFuture(), timeout)
+  }
+
+  def findUsers(): Vector[User] = {
+    val documents = Await.result(users().find().toFuture(), timeout)
+
+    Vector[User]() ++ documents.map { user =>
+      User.toModel(user)
+    }
   }
 
   def destroy(): Unit = {

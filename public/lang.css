@@ -80,3 +80,55 @@ input[type=range].sql::-webkit-slider-thumb {
   background: var(--sql);
   box-shadow: var(--track) var(--sql);
 }
+
+.attribute_list .js {
+  background: var(--js);
+}
+
+.attribute_list .swift {
+  background: var(--swift);
+}
+
+.attribute_list .go {
+  background: var(--go);
+}
+
+.attribute_list .rb {
+  background: var(--rb);
+}
+
+.attribute_list .py {
+  background: var(--py);
+}
+
+.attribute_list .scala {
+  background: var(--scala);
+}
+
+.attribute_list .java {
+  background: var(--java);
+}
+
+.attribute_list .kt {
+  background: var(--kt);
+}
+
+.attribute_list .cpp {
+  background: var(--cpp);
+}
+
+.attribute_list .m {
+  background: var(--m);
+}
+
+.attribute_list .cs {
+  background: var(--cs);
+}
+
+.attribute_list .php {
+  background: var(--php);
+}
+
+.attribute_list .sql {
+  background: var(--sql);
+}

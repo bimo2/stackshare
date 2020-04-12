@@ -6,6 +6,15 @@ body, h1, h2, h3, h4, h5, h6, p {
   margin: 0;
 }
 
+h1 {
+  font-size: 2.25rem;
+  text-align: center;
+}
+
+h4 {
+  font-weight: 500;
+}
+
 a {
   color: #4187ff;
   text-decoration: none;
@@ -124,6 +133,7 @@ header > .frame {
 }
 
 .stackshare {
+  font-size: 2rem;
   font-weight: 600;
 }
 
@@ -146,17 +156,38 @@ header > .frame {
   max-width: 400px;
 }
 
-.form h1 {
-  font-weight: 600;
-  margin-bottom: 1.25rem;
-}
-
 .form button {
   width: 100%;
 }
 
-.form_next {
+.space_above {
   margin-top: 1rem;
+}
+
+.more_space_above {
+  margin-top: 1.6rem;
+}
+
+.attribute_list {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.attribute_list > div {
+  align-items: center;
+  display: flex;
+  font-weight: 300;
+  font-size: 0.95rem;
+  margin: 1rem 0.8rem 0 0.8rem;
+}
+
+.attribute_list span {
+  border-radius: 100%;
+  display: block;
+  height: 16px;
+  margin: 0 0.45rem;
+  width: 16px;
 }
 
 .copyright {

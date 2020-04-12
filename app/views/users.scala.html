@@ -1,0 +1,19 @@
+@import io.bimo2.stackshare.User
+@import io.bimo2.stackshare.Language
+
+@(users: Vector[User], averages: Vector[(String, Double)])
+
+@main("Users") {
+  <div class="card">
+    <h1>Users</h1>
+    <h4 class="more_space_above"><u>Average User Attributes:</u></h4>
+    <div class="attribute_list">
+      @for((key, value) <- averages) {
+        <div><span class="@key"></span>@Language.mapping(key) &rarr; @{f"$value%.2f"}</div>
+      }
+    </div>
+  </div>
+  <div class="card space_above">
+    <a href="/users/new"><button>New User</button></a>
+  </div>
+}

@@ -1,6 +1,7 @@
 GET     /                           io.bimo2.stackshare.IndexController.index
 DELETE  /                           io.bimo2.stackshare.IndexController.destroy
 
+GET     /users                      io.bimo2.stackshare.UsersController.index
 POST    /users                      io.bimo2.stackshare.UsersController.create
 GET     /users/new                  io.bimo2.stackshare.UsersController.add
 
