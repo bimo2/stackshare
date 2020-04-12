@@ -89,4 +89,23 @@ class UsersController(val controllerComponents: ControllerComponents)
       }
     }
   }
+
+  def destroy(id: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    try {
+      NoSQLService.dropUser(id)
+
+      val message = Message(200)
+      val response = Json.toJson(message)
+
+      Ok(response)
+    }
+    catch {
+      case e: Exception => {
+        val message = Message(500, e.getMessage())
+        val response = Json.toJson(message)
+
+        InternalServerError(response)
+      }
+    }
+  }
 }

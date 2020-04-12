@@ -7,7 +7,7 @@
   <div class="card">
     <div class="action_bar">
       <h1>@user.username</h1>
-      <button>Delete User</button>
+      <button onclick="onDestroyUser('@user.username')">Delete User</button>
     </div>
     <div class="barchart space_above">
       @for((key, value) <- user.attributes) {

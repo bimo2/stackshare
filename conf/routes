@@ -5,6 +5,7 @@ GET     /users                      io.bimo2.stackshare.UsersController.index
 POST    /users                      io.bimo2.stackshare.UsersController.create
 GET     /users/new                  io.bimo2.stackshare.UsersController.add
 GET     /users/:id                  io.bimo2.stackshare.UsersController.show(id: String)
+DELETE  /users/:id                  io.bimo2.stackshare.UsersController.destroy(id: String)
 
 GET     /error/:status              io.bimo2.stackshare.ErrorController.show(status: Int)
 

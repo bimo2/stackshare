@@ -56,6 +56,12 @@ object NoSQLService {
     User.toModel(documents.head)
   }
 
+  def dropUser(id: String): Unit = {
+    val query = equal("username", id)
+
+    Await.result(users().deleteOne(query).toFuture(), timeout)
+  }
+
   def destroy(): Unit = {
     Await.result(users().drop().toFuture(), timeout)
     Await.result(positions().drop().toFuture(), timeout)

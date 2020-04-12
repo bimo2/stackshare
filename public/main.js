@@ -42,3 +42,13 @@ const onCreateUser = async () => {
 
   return false;
 };
+
+const onDestroyUser = async (username) => {
+  let request = fetch(`${path}/users/${username}`, {
+    method: 'DELETE',
+  });
+
+  isOk(await request);
+
+  window.location.href = `${path}/users`;
+}
