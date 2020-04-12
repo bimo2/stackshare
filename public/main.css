@@ -8,7 +8,6 @@ body, h1, h2, h3, h4, h5, h6, p {
 
 h1 {
   font-size: 2.25rem;
-  text-align: center;
 }
 
 h4 {
@@ -16,7 +15,7 @@ h4 {
 }
 
 a {
-  color: #4187ff;
+  color: #2783f2;
   text-decoration: none;
 }
 
@@ -73,6 +72,16 @@ input[type=range] {
 input[type=range]::-webkit-slider-thumb {
   cursor: pointer;
   width: 20px;
+}
+
+table {
+  width: 100%;
+}
+
+td {
+  font-size: 0.95rem;
+  font-weight: 300;
+  padding-top: 1.5rem;
 }
 
 header {
@@ -174,15 +183,18 @@ header > .frame {
   justify-content: space-evenly;
 }
 
-.attribute_list > div {
-  align-items: center;
-  display: flex;
-  font-weight: 300;
-  font-size: 0.95rem;
+.attribute_list .attribute_data {
   margin: 1rem 0.8rem 0 0.8rem;
 }
 
-.attribute_list span {
+.attribute_data {
+  align-items: center;
+  display: flex;
+  font-size: 0.95rem;
+  font-weight: 300;
+}
+
+.attribute_data span {
   border-radius: 100%;
   display: block;
   height: 16px;

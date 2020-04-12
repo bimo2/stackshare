@@ -1,5 +1,7 @@
 package io.bimo2.stackshare
 
+import scala.collection.immutable.ListMap
+
 import play.api.libs.json._
 import play.api.mvc._
 
@@ -15,6 +17,10 @@ class UsersController(val controllerComponents: ControllerComponents)
         for ((key, value) <- user.attributes) {
           attributes = attributes.updatedWith(key)(_.map(_ + value))
         }
+
+        val userAttributes = user.attributes.toSeq.sortWith(_._2 > _._2)
+
+        user.attributes = ListMap(userAttributes: _*).filter(_._2 > 0).take(3)
       }
 
       val averages = attributes.transform((key, value) => {

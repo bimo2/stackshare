@@ -81,54 +81,54 @@ input[type=range].sql::-webkit-slider-thumb {
   box-shadow: var(--track) var(--sql);
 }
 
-.attribute_list .js {
+.attribute_data .js {
   background: var(--js);
 }
 
-.attribute_list .swift {
+.attribute_data .swift {
   background: var(--swift);
 }
 
-.attribute_list .go {
+.attribute_data .go {
   background: var(--go);
 }
 
-.attribute_list .rb {
+.attribute_data .rb {
   background: var(--rb);
 }
 
-.attribute_list .py {
+.attribute_data .py {
   background: var(--py);
 }
 
-.attribute_list .scala {
+.attribute_data .scala {
   background: var(--scala);
 }
 
-.attribute_list .java {
+.attribute_data .java {
   background: var(--java);
 }
 
-.attribute_list .kt {
+.attribute_data .kt {
   background: var(--kt);
 }
 
-.attribute_list .cpp {
+.attribute_data .cpp {
   background: var(--cpp);
 }
 
-.attribute_list .m {
+.attribute_data .m {
   background: var(--m);
 }
 
-.attribute_list .cs {
+.attribute_data .cs {
   background: var(--cs);
 }
 
-.attribute_list .php {
+.attribute_data .php {
   background: var(--php);
 }
 
-.attribute_list .sql {
+.attribute_data .sql {
   background: var(--sql);
 }
