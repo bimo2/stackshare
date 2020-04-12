@@ -19,9 +19,10 @@ class IndexController(val controllerComponents: ControllerComponents)
     }
   }
 
-  def destroy(): Action[JsValue] = Action(parse.json) { implicit request: Request[JsValue] =>
+  def destroy(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     try {
       NoSQLService.destroy()
+
       val message = Message(200)
       val response = Json.toJson(message)
 

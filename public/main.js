@@ -27,14 +27,13 @@ const onCreateUser = async () => {
   };
 
   if (data.username && !!Object.keys(data.attributes).length) {
-    let response = await fetch(`${path}/users`, {
+    let request = fetch(`${path}/users`, {
       method: 'POST',
       headers: { ...content },
       body: JSON.stringify(data)
     });
 
-    isOk(response);
-
+    let response = isOk(await request);
     let json = await response.json();
 
     window.location.href = `${path}/users/${json.username}`;

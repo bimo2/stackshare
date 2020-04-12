@@ -10,10 +10,13 @@ class UsersController(val controllerComponents: ControllerComponents)
     Ok(views.html.new_user())
   }
 
-  def create(): Action[JsValue] = Action(parse.json) { implicit request: Request[JsValue] =>
+  def create(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     try {
-      val json = request.body
+      val json = request.body.asJson.get
       val user = json.as[User]
+
+      NoSQLService.writeUser(user)
+
       val response = Json.toJson(user)
 
       Ok(response)
