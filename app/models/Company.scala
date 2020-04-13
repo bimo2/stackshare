@@ -11,7 +11,7 @@ class Company(val id: Option[String], val domain: String, var name: Option[Strin
     val idOption = id.getOrElse(None)
     val nameOption = name.getOrElse(None)
 
-    s"($idOption) $domain: $name"
+    s"[Company] ($idOption) $domain: $name"
   }
 }
 

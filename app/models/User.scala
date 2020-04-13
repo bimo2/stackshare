@@ -10,7 +10,7 @@ class User(val id: Option[String], val username: String, var attributes: Map[Str
   override def toString(): String = {
     val idOption = id.getOrElse(None)
 
-    s"($idOption) $username"
+    s"[User] ($idOption) $username"
   }
 }
 
