@@ -26,6 +26,7 @@ class Stackshare(context: Context)
 
   lazy val indexController = new IndexController(controllerComponents)
   lazy val usersController = new UsersController(controllerComponents)
+  lazy val positionsController = new PositionsController(controllerComponents)
   lazy val companiesController = new CompaniesController(controllerComponents)
   lazy val errorController = new ErrorController(controllerComponents)
 
@@ -33,6 +34,7 @@ class Stackshare(context: Context)
     httpErrorHandler,
     indexController,
     usersController,
+    positionsController,
     companiesController,
     errorController,
     assets

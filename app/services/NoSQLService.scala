@@ -77,7 +77,7 @@ object NoSQLService {
   }
 
   def findPosition(id: String): Position = {
-    val query = equal("url", id)
+    val query = equal("_id", new ObjectId(id))
     val documents = Await.result(positions().find(query).toFuture(), timeout)
 
     Position.toModel(documents.head)

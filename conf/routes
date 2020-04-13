@@ -7,6 +7,8 @@ GET     /users/new                  io.bimo2.stackshare.UsersController.add
 GET     /users/:id                  io.bimo2.stackshare.UsersController.show(id: String)
 DELETE  /users/:id                  io.bimo2.stackshare.UsersController.destroy(id: String)
 
+GET     /positions                  io.bimo2.stackshare.PositionsController.index
+
 GET     /companies                  io.bimo2.stackshare.CompaniesController.index
 POST    /companies                  io.bimo2.stackshare.CompaniesController.create
 GET     /companies/new              io.bimo2.stackshare.CompaniesController.add

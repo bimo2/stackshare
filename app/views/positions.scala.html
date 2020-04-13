@@ -1,0 +1,29 @@
+@import io.bimo2.stackshare.Position
+
+@(positions: Vector[Position])
+
+@main("Companies") {
+  <div class="card">
+    <h1>Positions</h1>
+    @if(positions.length > 0) {
+      <h2 class="space_above">Popular Attributes</h2>
+    }
+  </div>
+  <div class="card more_space_above">
+    @if(positions.length > 0) {
+      <table>
+        <tbody>
+          @for(position <- positions) {
+            <tr>
+              <td>@position.id</td>
+              <td><a href="/positions/@position.id">@position.domain</a></td>
+              <td>@position.text</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } else {
+      <div class="without_data">No positions.</div>
+    }
+  </div>
+}
