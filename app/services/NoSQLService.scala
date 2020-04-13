@@ -59,6 +59,36 @@ object NoSQLService {
     Await.result(users().deleteOne(query).toFuture(), timeout)
   }
 
+  def writePosition(position: Position): Unit = {
+    val document = Position.toNoSQL(position)
+    val filter = Document("url" -> position.url)
+    val options = ReplaceOptions().upsert(true)
+
+    Await.result(positions().replaceOne(filter, document, options).toFuture(), timeout)
+  }
+
+  def findPositions(): Vector[Position] = {
+    val sort = ascending("domain")
+    val documents = Await.result(positions().find().sort(sort).toFuture(), timeout)
+
+    Vector[Position]() ++ documents.map { document =>
+      Position.toModel(document)
+    }
+  }
+
+  def findPosition(id: String): Position = {
+    val query = equal("url", id)
+    val documents = Await.result(positions().find(query).toFuture(), timeout)
+
+    Position.toModel(documents.head)
+  }
+
+  def dropPosition(id: String): Unit = {
+    val query = equal("url", id)
+
+    Await.result(positions().deleteOne(query).toFuture(), timeout)
+  }
+
   def writeCompany(company: Company): Unit = {
     val document = Company.toNoSQL(company)
     val filter = Document("domain" -> company.domain)
