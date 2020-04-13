@@ -15,8 +15,6 @@ trait NoSQLModel[A] {
   def toModel(document: Document): A
 }
 
-case class NotFoundException(message: String) extends Exception(message)
-
 object NoSQLService {
 
   private val client = MongoClient()
@@ -101,12 +99,12 @@ object NoSQLService {
     Await.result(database.createCollection("companies").toFuture(), timeout)
 
     val usersIndex = Document("username" -> 1)
-    // val positionsIndex = Document()
+    val positionsIndex = Document("url" -> 1)
     val companiesIndex = Document("domain" -> 1)
     val options = IndexOptions().unique(true)
 
     Await.result(users().createIndex(usersIndex, options).toFuture(), timeout)
-    // Await.result(positions().createIndex(positionsIndex, options).toFuture(), timeout)
+    Await.result(positions().createIndex(positionsIndex, options).toFuture(), timeout)
     Await.result(companies().createIndex(companiesIndex, options).toFuture(), timeout)
   }
 
