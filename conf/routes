@@ -10,6 +10,7 @@ DELETE  /users/:id                  io.bimo2.stackshare.UsersController.destroy(
 GET     /companies                  io.bimo2.stackshare.CompaniesController.index
 POST    /companies                  io.bimo2.stackshare.CompaniesController.create
 GET     /companies/new              io.bimo2.stackshare.CompaniesController.add
+DELETE  /companies/:id              io.bimo2.stackshare.CompaniesController.destroy(id: String)
 
 GET     /error/:status              io.bimo2.stackshare.ErrorController.show(status: Int)
 
