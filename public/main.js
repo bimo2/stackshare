@@ -25,8 +25,8 @@ const onQueryChange = (query) => {
 
 const onCreateUser = async () => {
   const attributeNodes = document.getElementsByName('attributes');
-  const username = document.getElementsByName('username')[0].value.toLowerCase();
   const attributes = Array.from(attributeNodes);
+  const username = document.getElementsByName('username')[0].value.toLowerCase();
 
   const data = {
     username: username || undefined,
@@ -65,4 +65,26 @@ const onDestroyUser = async (username) => {
   isOk(await request);
 
   window.location.href = `${path}/users`;
+};
+
+const onCreateCompany = async () => {
+  const domain = document.getElementsByName('domain')[0].value.toLowerCase() || undefined;
+  const name = document.getElementsByName('company_name')[0].value || undefined;
+
+  const data = { domain, name };
+
+  if (data.domain) {
+    let request = fetch(`${path}/companies`, {
+      method: 'POST',
+      headers: { ...content },
+      body: JSON.stringify(data)
+    });
+
+    let response = isOk(await request);
+    let json = await response.json();
+
+    window.location.href = `${path}/companies/${json.domain}`;
+  }
+
+  return false;
 };

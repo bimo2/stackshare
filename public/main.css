@@ -280,6 +280,10 @@ header > .content {
   text-align: center;
 }
 
+.metrics a {
+  width: 33.333%;
+}
+
 .error_trace {
   color: #f0182e;
   font-family: 'SF Mono', Menlo, monospace;

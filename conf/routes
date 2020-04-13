@@ -8,6 +8,8 @@ GET     /users/:id                  io.bimo2.stackshare.UsersController.show(id:
 DELETE  /users/:id                  io.bimo2.stackshare.UsersController.destroy(id: String)
 
 GET     /companies                  io.bimo2.stackshare.CompaniesController.index
+POST    /companies                  io.bimo2.stackshare.CompaniesController.create
+GET     /companies/new              io.bimo2.stackshare.CompaniesController.add
 
 GET     /error/:status              io.bimo2.stackshare.ErrorController.show(status: Int)
 

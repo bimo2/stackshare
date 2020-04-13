@@ -1,0 +1,12 @@
+@()
+
+@main("New Company") {
+  <form class="create card">
+    <h1>New Company</h1>
+    <label class="space_above">Domain</label>
+    <input type="text" name="domain" placeholder="lululemon.com" autocomplete="off" />
+    <label class="space_above">Company Name</label>
+    <input type="text" name="company_name" placeholder="Lululemon Athletica" autocomplete="off" />
+    <button class="more_space_above" type="button" onclick="onCreateCompany()">Create Company</button>
+  </form>
+}

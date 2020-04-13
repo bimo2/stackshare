@@ -32,9 +32,8 @@ object NoSQLService {
   }
 
   def writeUser(user: User): Unit = {
-    val _id = new ObjectId(user.id.getOrElse(new ObjectId().toString()))
     val document = User.toNoSQL(user)
-    val filter = Document("_id" -> _id)
+    val filter = Document("username" -> user.username)
     val options = ReplaceOptions().upsert(true)
 
     Await.result(users().replaceOne(filter, document, options).toFuture(), timeout)
@@ -63,9 +62,8 @@ object NoSQLService {
   }
 
   def writeCompany(company: Company): Unit = {
-    val _id = new ObjectId(company.id.getOrElse(new ObjectId().toString()))
     val document = Company.toNoSQL(company)
-    val filter = Document("_id" -> _id)
+    val filter = Document("domain" -> company.domain)
     val options = ReplaceOptions().upsert(true)
 
     Await.result(companies().replaceOne(filter, document, options).toFuture(), timeout)
