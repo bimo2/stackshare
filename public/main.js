@@ -11,6 +11,14 @@ const isOk = (response) => {
   window.location.href = `${path}/error/${response.status}`;
 };
 
+const onQueryChange = (query) => {
+  const button = document.getElementById("search_button");
+
+  button.innerText = query.startsWith('http://') || query.startsWith('https://') ?
+    'Fetch' :
+    'Search';
+};
+
 const onCreateUser = async () => {
   const attributeNodes = document.getElementsByName('attributes');
   const username = document.getElementsByName('username')[0].value.toLowerCase();
@@ -51,4 +59,4 @@ const onDestroyUser = async (username) => {
   isOk(await request);
 
   window.location.href = `${path}/users`;
-}
+};
