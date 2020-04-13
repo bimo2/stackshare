@@ -11,6 +11,10 @@ const isOk = (response) => {
   window.location.href = `${path}/error/${response.status}`;
 };
 
+const encodeParams = (...values) => values
+  .map((value) => encodeURIComponent(value))
+  .join('/');
+
 const onQueryChange = (query) => {
   const button = document.getElementById("search_button");
 
@@ -52,7 +56,9 @@ const onCreateUser = async () => {
 };
 
 const onDestroyUser = async (username) => {
-  let request = fetch(`${path}/users/${username}`, {
+  const params = encodeParams(username);
+
+  let request = fetch(`${path}/users/${params}`, {
     method: 'DELETE',
   });
 

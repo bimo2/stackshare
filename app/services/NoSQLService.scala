@@ -62,6 +62,37 @@ object NoSQLService {
     Await.result(users().deleteOne(query).toFuture(), timeout)
   }
 
+  def writeCompany(company: Company): Unit = {
+    val _id = new ObjectId(company.id.getOrElse(new ObjectId().toString()))
+    val document = Company.toNoSQL(company)
+    val filter = Document("_id" -> _id)
+    val options = ReplaceOptions().upsert(true)
+
+    Await.result(companies().replaceOne(filter, document, options).toFuture(), timeout)
+  }
+
+  def findCompanies(): Vector[Company] = {
+    val sort = ascending("domain")
+    val documents = Await.result(companies().find().sort(sort).toFuture(), timeout)
+
+    Vector[Company]() ++ documents.map { document =>
+      Company.toModel(document)
+    }
+  }
+
+  def findCompany(id: String): Company = {
+    val query = equal("domain", id)
+    val documents = Await.result(companies().find(query).toFuture(), timeout)
+
+    Company.toModel(documents.head)
+  }
+
+  def dropCompany(id: String): Unit = {
+    val query = equal("domain", id)
+
+    Await.result(companies().deleteOne(query).toFuture(), timeout)
+  }
+
   def destroy(): Unit = {
     Await.result(users().drop().toFuture(), timeout)
     Await.result(positions().drop().toFuture(), timeout)
@@ -73,10 +104,12 @@ object NoSQLService {
 
     val usersIndex = Document("username" -> 1)
     // val positionsIndex = Document()
-    // val companiesIndex = Document()
+    val companiesIndex = Document("domain" -> 1)
     val options = IndexOptions().unique(true)
 
     Await.result(users().createIndex(usersIndex, options).toFuture(), timeout)
+    // Await.result(positions().createIndex(positionsIndex, options).toFuture(), timeout)
+    Await.result(companies().createIndex(companiesIndex, options).toFuture(), timeout)
   }
 
   private def users(): MongoCollection[Document] = {

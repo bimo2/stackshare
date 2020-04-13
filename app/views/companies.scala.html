@@ -1,0 +1,32 @@
+@import io.bimo2.stackshare.Company
+
+@(companies: Vector[Company])
+
+@main("Companies") {
+  <div class="card">
+    <div class="action_bar">
+      <h1>Companies</h1>
+      <div><a class="" href="/companies/new"><button>New Company</button></a></div>
+    </div>
+    @if(companies.length > 0) {
+      <h2 class="space_above">Popular Company Tech Stacks</h2>
+    }
+  </div>
+  <div class="card more_space_above">
+    @if(companies.length > 0) {
+      <table>
+        <tbody>
+          @for(company <- companies) {
+            <tr>
+              <td>@company.id</td>
+              <td><a href="/companies/@company.domain">@company.domain</a></td>
+              <td>@company.name</td>
+            </tr>
+          }
+        </tbody>
+      </table>
+    } else {
+      <div class="without_data">No companies.</div>
+    }
+  </div>
+}

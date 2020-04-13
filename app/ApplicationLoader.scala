@@ -26,12 +26,14 @@ class Stackshare(context: Context)
 
   lazy val indexController = new IndexController(controllerComponents)
   lazy val usersController = new UsersController(controllerComponents)
+  lazy val companiesController = new CompaniesController(controllerComponents)
   lazy val errorController = new ErrorController(controllerComponents)
 
   lazy val router = new Routes(
     httpErrorHandler,
     indexController,
     usersController,
+    companiesController,
     errorController,
     assets
   )

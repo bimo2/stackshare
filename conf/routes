@@ -7,6 +7,8 @@ GET     /users/new                  io.bimo2.stackshare.UsersController.add
 GET     /users/:id                  io.bimo2.stackshare.UsersController.show(id: String)
 DELETE  /users/:id                  io.bimo2.stackshare.UsersController.destroy(id: String)
 
+GET     /companies                  io.bimo2.stackshare.CompaniesController.index
+
 GET     /error/:status              io.bimo2.stackshare.ErrorController.show(status: Int)
 
 GET     /assets/*file               controllers.Assets.versioned(path="/public", file: Asset)
