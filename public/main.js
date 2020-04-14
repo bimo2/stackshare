@@ -121,7 +121,7 @@ const onUpdatePositionDomain = async (id, domain) => {
         domain: document.getElementsByName('new_domain')[0].value.trim()
       };
 
-      if (data.domain) {
+      if (data.domain && data.domain !== domain) {
         let request = fetch(`${path}/positions/${params}`, {
           method: 'POST',
           headers: { ...content },
@@ -134,12 +134,15 @@ const onUpdatePositionDomain = async (id, domain) => {
         window.location.reload();
       }
 
+      element.value = domain;
+      element.style.display = 'none';
+      element.dataset.update = 'off';
       break;
 
     default:
       element.value = domain;
       element.style.display = 'block';
-      element.dataset.update = "on";
+      element.dataset.update = 'on';
   }
 };
 
