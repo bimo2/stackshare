@@ -68,15 +68,7 @@ object NoSQLService {
 
     Await.result(positions().replaceOne(filter, document, options).toFuture(), timeout)
 
-    val find = equal("domain", position.domain)
-    val results = Await.result(companies().find(find).toFuture(), timeout)
-    val exists = !results.headOption.isEmpty
-
-    if (!exists) {
-      val company = new Company(None, position.domain, None)
-
-      writeCompany(company)
-    }
+    writeDomain(position.domain)
   }
 
   def findPositions(): Vector[Position] = {
@@ -116,6 +108,8 @@ object NoSQLService {
     val update = set("domain", domain)
 
     Await.result(positions().updateOne(query, update).toFuture(), timeout)
+
+    writeDomain(domain)
   }
 
   def dropPosition(id: String): Unit = {
@@ -184,5 +178,17 @@ object NoSQLService {
 
   private def companies(): MongoCollection[Document] = {
     database.getCollection("companies")
+  }
+
+  private def writeDomain(domain: String): Unit = {
+    val find = equal("domain", domain)
+    val results = Await.result(companies().find(find).toFuture(), timeout)
+    val exists = !results.headOption.isEmpty
+
+    if (!exists) {
+      val company = new Company(None, domain, None)
+
+      writeCompany(company)
+    }
   }
 }

@@ -111,14 +111,14 @@ const onDestroyUser = async (username) => {
 };
 
 const onUpdatePositionDomain = async (id, domain) => {
-  const element = document.getElementsByName('domain')[0];
+  const element = document.getElementsByName('new_domain')[0];
 
   switch (element.dataset.update) {
     case "on":
       const params = encodeParams(id);
 
       const data = {
-        domain: document.getElementsByName('domain')[0].value.trim()
+        domain: document.getElementsByName('new_domain')[0].value.trim()
       };
 
       if (data.domain) {

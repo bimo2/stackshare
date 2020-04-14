@@ -172,6 +172,20 @@ h2.dd {
   font-size: 1.75rem;
 }
 
+.information {
+  font-weight: 1.15rem;
+  font-weight: 500;
+  line-height: 1.5rem;
+}
+
+.information .rarr {
+  margin: 0 0.5rem;
+}
+
+.information .info {
+  font-weight: 300;
+}
+
 /* COMPONENTS */
 
 .card {
@@ -184,6 +198,19 @@ h2.dd {
   align-items: center;
   display: flex;
   justify-content: space-between;
+}
+
+.split {
+  display: flex;
+  margin-left: -0.9rem;
+  margin-right: -0.9rem;
+}
+
+.split > div {
+  flex-grow: 1;
+  margin-left: 0.9rem;
+  margin-right: 0.9rem;
+  width: 50%;
 }
 
 .attribute_list {
@@ -315,12 +342,22 @@ header > .content {
   width: 315px;
 }
 
-input[name=domain] {
+input[name=new_domain] {
   display: none;
+}
+
+.html_text, .error_trace {
+  font-family: 'SF Mono', Menlo, monospace;
+}
+
+.html_text {
+  font-size: 0.7rem;
+  font-weight: 300;
+  max-height: 275px;
+  overflow: scroll;
 }
 
 .error_trace {
   color: #f0182e;
-  font-family: 'SF Mono', Menlo, monospace;
   font-size: 1.15rem;
 }

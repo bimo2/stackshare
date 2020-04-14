@@ -6,13 +6,13 @@
 @main(s"${position.domain} | ${position.id.get}") {
   <div class="card">
     <div class="position_action_bar">
-      <h1 class="less_important">@position.title.getOrElse(s"${position.domain}: $position.id")</h1>
+      <h1 class="less_important">@position.title.getOrElse(s"${position.domain}: ${position.id.get}")</h1>
       <div>
         <button onclick="onUpdatePositionDomain('@position.id', '@position.domain')">Update Domain</button>
         <button onclick="onDestroyPosition('@position.id')">Delete Position</button>
       </div>
     </div>
-    <input class="space_above" type="text" name="domain" placeholder="@position.domain" autocomplete="off" data-update="off" />
+    <input class="space_above" type="text" name="new_domain" placeholder="@position.domain" autocomplete="off" data-update="off" />
     <div class="barchart space_above">
       @for((key, value) <- position.attributes) {
         <div class="bar" style="width: calc(@{value * 100}%);">
@@ -21,5 +21,27 @@
         </div>
       }
     </div>
+  </div>
+  <div class="split more_space_above">
+    <div class="card">
+      <h2>Position Details</h2>
+      <div class="information space_above">ID<span class="rarr">&rarr;</span><span class="info">@position.id.get</span></div>
+      <div class="information less_space_above">Title<span class="rarr">&rarr;</span><span class="info">@position.title.getOrElse("None")</span></div>
+      <div class="information less_space_above">Company<span class="rarr">&rarr;</span><a href="/companies/@position.domain"><span class="info">@position.domain</span></a></div>
+      <div class="information less_space_above">Description<span class="rarr">&rarr;</span><span class="info">@position.description.getOrElse("None")</span></div>
+    </div>
+    <div class="card">
+      <h2>Suggested Users</h2>
+    </div>
+  </div>
+  <div class="card more_space_above">
+    @if(position.text.length > 0) {
+      <h2>HTML Content</h2>
+    }
+    @if(position.text.length > 0) {
+      <div class="html_text space_above">@position.text</div>
+    } else {
+      <div class="attention">No positions.</div>
+    }
   </div>
 }
