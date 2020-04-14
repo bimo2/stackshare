@@ -1,5 +1,6 @@
 package io.bimo2.stackshare
 
+import scala.Numeric.Implicits._
 import scala.util.control.Breaks._
 
 object Language {
@@ -38,6 +39,18 @@ object Language {
 
   def getDoubleMapping(): Map[String, Double] = {
     Map(mapping.keySet.toSeq.map((_, 0.toDouble)): _*)
+  }
+
+  def dotProduct(user: Map[String, Double], dataset: Map[String, Double]): Double = {
+    val v = getDoubleMapping() ++ user
+    val vt = getDoubleMapping() ++ dataset
+    var score = 0.toDouble
+
+    for ((key, value) <- v) {
+      score += vt(key) * value
+    }
+
+    score
   }
 
   def frequencyAnalysis(title: String, description: String, text: Seq[String]): Map[String, Double] = {

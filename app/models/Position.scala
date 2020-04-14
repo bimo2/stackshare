@@ -1,6 +1,7 @@
 package io.bimo2.stackshare
 
 import org.mongodb.scala.Document
+import scala.collection.immutable.ListMap
 
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
@@ -12,6 +13,25 @@ class Position(val id: Option[String], val url: String, val text: String, var ti
     val titleOption = title.getOrElse(None)
 
     s"[Position] ($idOption) $domain: $titleOption"
+  }
+
+  def suggestUsers(users: Vector[User], max: Int): Vector[(User, Double)] = {
+    var results = Vector[(User, Double)]()
+
+    for (user <- users) {
+      val vector = user.attributes.map {
+        case (key, value) => {
+          (key, value.toDouble)
+        }
+      }
+
+      val score = Language.dotProduct(vector, attributes)
+      results = results :+ (user, score)
+    }
+
+    results = results.toSeq.filter(_._2 > 0).sortWith(_._2 > _._2)
+    
+    Vector[(User, Double)]() ++ results.take(max)
   }
 }
 

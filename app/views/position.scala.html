@@ -1,7 +1,8 @@
 @import io.bimo2.stackshare.Position
+@import io.bimo2.stackshare.User
 @import io.bimo2.stackshare.Language
 
-@(position: Position)
+@(position: Position, suggestions: Vector[(User, Double)])
 
 @main(s"${position.domain} | ${position.id.get}") {
   <div class="card">
@@ -32,16 +33,31 @@
     </div>
     <div class="card">
       <h2>Suggested Users</h2>
+      @if(suggestions.length > 0) {
+        <table class="no_space">
+          <tbody>
+            @for((user, score) <- suggestions) {
+              <tr>
+                <td width="24%"><a href="/users/@user.username">@user.username</a></td>
+                <td class="attention" width="40%">@{f"$score%.3f"}</td>
+                @for((key, value) <- user.attributes) {
+                  <td width="12%">
+                    <div class="circle"><span class="@key"></span></div>
+                  </td>
+                }
+              </tr>
+            }
+          </tbody>
+        </table>
+      } else {
+        <div class="attention space_above">No users.</div>
+      }
     </div>
   </div>
-  <div class="card more_space_above">
-    @if(position.text.length > 0) {
+  @if(position.text.length > 0) {
+    <div class="card more_space_above">
       <h2>HTML Content</h2>
-    }
-    @if(position.text.length > 0) {
       <div class="html_text space_above">@position.text</div>
-    } else {
-      <div class="attention">No positions.</div>
-    }
-  </div>
+    </div>
+  }
 }
