@@ -1,14 +1,10 @@
 package io.bimo2.stackshare
 
 import net.ruippeixotog.scalascraper.browser.HtmlUnitBrowser
-
-
+import net.ruippeixotog.scalascraper.model.TextNode
 
 import net.ruippeixotog.scalascraper.dsl.DSL._
 import net.ruippeixotog.scalascraper.dsl.DSL.Extract._
-import net.ruippeixotog.scalascraper.dsl.DSL.Parse._
-
-import net.ruippeixotog.scalascraper.model._
 
 object WebContentService {
 
