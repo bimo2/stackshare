@@ -133,11 +133,14 @@ td {
   font-size: 0.95rem;
   font-weight: 300;
   max-width: 0;
-  overflow: hidden;
   padding: 1.5rem 0 0 0;
+}
+
+td, .less_important {
+  overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-}
+} 
 
 td .table_attribute {
   display: inline-block;
@@ -296,6 +299,24 @@ header > .content {
 
 .metrics a {
   width: 33.333%;
+}
+
+.position_action_bar > * {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.position_action_bar > h1 {
+  width: calc(100% - 320px);
+}
+
+.position_action_bar > div {
+  text-align: right;
+  width: 315px;
+}
+
+input[name=domain] {
+  display: none;
 }
 
 .error_trace {

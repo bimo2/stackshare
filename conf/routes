@@ -9,6 +9,9 @@ DELETE  /users/:id                  io.bimo2.stackshare.UsersController.destroy(
 
 GET     /positions                  io.bimo2.stackshare.PositionsController.index
 POST    /positions                  io.bimo2.stackshare.PositionsController.create
+GET     /positions/:id              io.bimo2.stackshare.PositionsController.show(id: String)
+POST    /positions/:id              io.bimo2.stackshare.PositionsController.update(id: String)
+DELETE  /positions/:id              io.bimo2.stackshare.PositionsController.destroy(id: String)
 
 GET     /companies                  io.bimo2.stackshare.CompaniesController.index
 POST    /companies                  io.bimo2.stackshare.CompaniesController.create

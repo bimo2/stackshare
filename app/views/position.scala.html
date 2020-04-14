@@ -1,0 +1,25 @@
+@import io.bimo2.stackshare.Position
+@import io.bimo2.stackshare.Language
+
+@(position: Position)
+
+@main(s"${position.domain} | ${position.id.get}") {
+  <div class="card">
+    <div class="position_action_bar">
+      <h1 class="less_important">@position.title.getOrElse(s"${position.domain}: $position.id")</h1>
+      <div>
+        <button onclick="onUpdatePositionDomain('@position.id', '@position.domain')">Update Domain</button>
+        <button onclick="onDestroyPosition('@position.id')">Delete Position</button>
+      </div>
+    </div>
+    <input class="space_above" type="text" name="domain" placeholder="@position.domain" autocomplete="off" data-update="off" />
+    <div class="barchart space_above">
+      @for((key, value) <- position.attributes) {
+        <div class="bar" style="width: calc(@{value * 100}%);">
+          @Language.mapping(key) &rarr; @{f"${100 * value}%.2f"}%
+          <div class="@key" style="width: 100%;"></div>
+        </div>
+      }
+    </div>
+  </div>
+}

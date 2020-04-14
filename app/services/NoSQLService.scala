@@ -8,6 +8,7 @@ import org.mongodb.scala.model._
 import org.mongodb.scala.model.Filters._
 import org.mongodb.scala.model.Projections._
 import org.mongodb.scala.model.Sorts._
+import org.mongodb.scala.model.Updates._
 import scala.concurrent.duration._
 
 trait NoSQLModel[A] {
@@ -110,8 +111,15 @@ object NoSQLService {
     Position.toModel(documents.head)
   }
 
+  def updatePositionDomain(id: String, domain: String): Unit = {
+    val query = equal("_id", new ObjectId(id))
+    val update = set("domain", domain)
+
+    Await.result(positions().updateOne(query, update).toFuture(), timeout)
+  }
+
   def dropPosition(id: String): Unit = {
-    val query = equal("_id", id)
+    val query = equal("_id", new ObjectId(id))
 
     Await.result(positions().deleteOne(query).toFuture(), timeout)
   }

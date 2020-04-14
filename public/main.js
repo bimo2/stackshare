@@ -110,6 +110,51 @@ const onDestroyUser = async (username) => {
   window.location.href = `${path}/users`;
 };
 
+const onUpdatePositionDomain = async (id, domain) => {
+  const element = document.getElementsByName('domain')[0];
+
+  switch (element.dataset.update) {
+    case "on":
+      const params = encodeParams(id);
+
+      const data = {
+        domain: document.getElementsByName('domain')[0].value.trim()
+      };
+
+      if (data.domain) {
+        let request = fetch(`${path}/positions/${params}`, {
+          method: 'POST',
+          headers: { ...content },
+          body: JSON.stringify(data)
+        });
+
+        let response = isOk(await request);
+        await response.json();
+
+        window.location.reload();
+      }
+
+      break;
+
+    default:
+      element.value = domain;
+      element.style.display = 'block';
+      element.dataset.update = "on";
+  }
+};
+
+const onDestroyPosition = async (id) => {
+  const params = encodeParams(id);
+
+  let request = fetch(`${path}/positions/${params}`, {
+    method: 'DELETE',
+  });
+
+  isOk(await request);
+
+  window.location.href = `${path}/positions`;
+};
+
 const onCreateCompany = async () => {
   const domain = document.getElementsByName('domain')[0].value.toLowerCase() || undefined;
   const name = document.getElementsByName('company_name')[0].value || undefined;

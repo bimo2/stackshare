@@ -39,6 +39,26 @@ class PositionsController(val controllerComponents: ControllerComponents)
     }
   }
 
+  def show(id: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    try {
+      val position = NoSQLService.findPosition(id)
+
+      val attributes = position.attributes.toSeq.sortWith(_._2 > _._2)
+      position.attributes = ListMap(attributes: _*).filter(_._2 > 0)
+
+      Ok(views.html.position(position))
+    }
+    catch {
+      case e: NoSuchElementException => {
+        NotFound(views.html.error(404, e.getMessage()))
+      }
+
+      case e: Exception => {
+        InternalServerError(views.html.error(500, e.getMessage()))
+      }
+    }
+  }
+
   def create(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     try {
       val json = request.body.asJson.get
@@ -65,6 +85,54 @@ class PositionsController(val controllerComponents: ControllerComponents)
         BadRequest(response)
       }
 
+      case e: Exception => {
+        val message = Message(500, e.getMessage())
+        val response = Json.toJson(message)
+
+        InternalServerError(response)
+      }
+    }
+  }
+
+  def update(id: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    try {
+      val json = request.body.asJson.get
+      val domain = (json \ "domain").as[String]
+
+      NoSQLService.updatePositionDomain(id, domain)
+
+      val message = Message(200)
+      val response = Json.toJson(message)
+
+      Ok(response)
+    }
+    catch {
+      case e: JsResultException => {
+        val message = Message(400, e.getMessage())
+        val response = Json.toJson(message)
+
+        BadRequest(response)
+      }
+
+      case e: Exception => {
+        val message = Message(500, e.getMessage())
+        val response = Json.toJson(message)
+
+        InternalServerError(response)
+      }
+    }
+  }
+
+  def destroy(id: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    try {
+      NoSQLService.dropPosition(id)
+
+      val message = Message(200)
+      val response = Json.toJson(message)
+
+      Ok(response)
+    }
+    catch {
       case e: Exception => {
         val message = Message(500, e.getMessage())
         val response = Json.toJson(message)

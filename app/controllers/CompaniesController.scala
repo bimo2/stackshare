@@ -51,6 +51,11 @@ class CompaniesController(val controllerComponents: ControllerComponents)
       val stack = company.stack.get.toSeq.sortWith(_._2 > _._2)
       company.stack = Option(ListMap(stack: _*).filter(_._2 > 0))
 
+      for (position <- positions) {
+        val attributes = position.attributes.toSeq.sortWith(_._2 > _._2)
+        position.attributes = ListMap(attributes: _*)
+      }
+
       Ok(views.html.company(company, positions))
     }
     catch {
