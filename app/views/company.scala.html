@@ -1,0 +1,47 @@
+@import io.bimo2.stackshare.Company
+@import io.bimo2.stackshare.Position
+@import io.bimo2.stackshare.Language
+
+@(company: Company, positions: Vector[Position])
+
+@main(s"${company.domain}") {
+  <div class="card">
+    <div class="action_bar">
+      <h1>@company.name.getOrElse(company.domain)</h1>
+      <button onclick="onDestroyCompany('@company.domain')">Delete Company</button>
+    </div>
+    <div class="barchart space_above">
+      @for((key, value) <- company.stack.get) {
+        <div class="bar" style="width: calc(@{value * 100}%);">
+          @Language.mapping(key) &rarr; @{f"${100 * value}%.2f"}%
+          <div class="@key" style="width: 100%;"></div>
+        </div>
+      }
+    </div>
+  </div>
+  <div class="card more_space_above">
+    @if(positions.length > 0) {
+      <h2>@company.name.getOrElse(company.domain) Positions</h2>
+    }
+    @if(positions.length > 0) {
+      <table class="no_space">
+        <tbody>
+          @for(position <- positions) {
+            <tr>
+              <td width="20%">@position.id</td>
+              <td class="attention" width="25%"><a href="/positions/@position.id">@position.domain</a></td>
+              <td width="40%">@position.title</td>
+              @for((key, value) <- position.attributes) {
+                <td class="attention" width="5%">
+                  <div class="table_attribute circle"><span class="@key"></span></div>
+                </td>
+              }
+            </tr>
+          }
+        </tbody>
+      </table>
+    } else {
+      <div class="attention">No positions.</div>
+    }
+  </div>
+}

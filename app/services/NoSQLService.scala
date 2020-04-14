@@ -90,6 +90,19 @@ object NoSQLService {
     }
   }
 
+  def findCompanyPositions(id: String): Vector[Position] = {
+    val query = equal("domain", id)
+    val sort = ascending("domain")
+    val projection = exclude("text")
+    val documents = Await.result(positions().find(query).projection(projection).sort(sort).toFuture(), timeout)
+
+    Vector[Position]() ++ documents.map { partial =>
+      val document = partial + ("text" -> "")
+
+      Position.toModel(document)
+    }
+  }
+
   def findPosition(id: String): Position = {
     val query = equal("_id", new ObjectId(id))
     val documents = Await.result(positions().find(query).toFuture(), timeout)
@@ -130,6 +143,7 @@ object NoSQLService {
   def dropCompany(id: String): Unit = {
     val query = equal("domain", id)
 
+    Await.result(positions().deleteMany(query).toFuture(), timeout)
     Await.result(companies().deleteOne(query).toFuture(), timeout)
   }
 

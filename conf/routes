@@ -13,6 +13,7 @@ POST    /positions                  io.bimo2.stackshare.PositionsController.crea
 GET     /companies                  io.bimo2.stackshare.CompaniesController.index
 POST    /companies                  io.bimo2.stackshare.CompaniesController.create
 GET     /companies/new              io.bimo2.stackshare.CompaniesController.add
+GET     /companies/:id              io.bimo2.stackshare.CompaniesController.show(id: String)
 DELETE  /companies/:id              io.bimo2.stackshare.CompaniesController.destroy(id: String)
 
 GET     /error/:status              io.bimo2.stackshare.ErrorController.show(status: Int)

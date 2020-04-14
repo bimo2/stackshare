@@ -129,3 +129,15 @@ const onCreateCompany = async () => {
     window.location.href = `${path}/companies/${json.domain}`;
   }
 };
+
+const onDestroyCompany = async (domain) => {
+  const params = encodeParams(domain);
+
+  let request = fetch(`${path}/companies/${params}`, {
+    method: 'DELETE',
+  });
+
+  isOk(await request);
+
+  window.location.href = `${path}/companies`;
+};

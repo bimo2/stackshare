@@ -20,13 +20,11 @@ class Company(val id: Option[String], val domain: String, var name: Option[Strin
     var count = 0
 
     positions.foreach { position =>
-      if (position.domain == domain) {
-        for ((key, value) <- position.attributes) {
-          attributes = attributes.updatedWith(key)(_.map(_ + value))
-        }
-
-        count += 1
+      for ((key, value) <- position.attributes) {
+        attributes = attributes.updatedWith(key)(_.map(_ + value))
       }
+
+      count += 1
     }
 
     val stackAverage = attributes.filter(_._2 > 0).map {

@@ -11,10 +11,10 @@ class CompaniesController(val controllerComponents: ControllerComponents)
   def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     try {
       val companies = NoSQLService.findCompanies()
-      val positions = NoSQLService.findPositions()
       var attributes = Language.getDoubleMapping()
 
       companies.foreach { company =>
+        val positions = NoSQLService.findCompanyPositions(company.domain)
         company.calculateStack(positions)
 
         val companyStack = company.stack.get.toSeq.sortWith(_._2 > _._2)
@@ -35,6 +35,29 @@ class CompaniesController(val controllerComponents: ControllerComponents)
       Ok(views.html.companies(companies, popular));
     }
     catch {
+      case e: Exception => {
+        InternalServerError(views.html.error(500, e.getMessage()))
+      }
+    }
+  }
+
+  def show(id: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
+    try {
+      val company = NoSQLService.findCompany(id)
+      val positions = NoSQLService.findCompanyPositions(id)
+
+      company.calculateStack(positions)
+
+      val stack = company.stack.get.toSeq.sortWith(_._2 > _._2)
+      company.stack = Option(ListMap(stack: _*).filter(_._2 > 0))
+
+      Ok(views.html.company(company, positions))
+    }
+    catch {
+      case e: NoSuchElementException => {
+        NotFound(views.html.error(404, e.getMessage()))
+      }
+
       case e: Exception => {
         InternalServerError(views.html.error(500, e.getMessage()))
       }
