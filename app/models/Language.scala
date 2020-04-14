@@ -36,7 +36,7 @@ object Language {
     "sql" -> Seq("sql", "mysql", "postgresql")
   )
 
-  def toDoubleMap(): Map[String, Double] = {
+  def getDoubleMapping(): Map[String, Double] = {
     Map(mapping.keySet.toSeq.map((_, 0.toDouble)): _*)
   }
 
@@ -66,15 +66,22 @@ object Language {
     }
 
     var attributes = Map[String, Double]()
+    var total = 0.toDouble
 
     for ((key, seq) <- frequencies) {
       val frequencyScore = seq.length / count.toDouble
       val indexScore = seq.map(content.length - _).sum
       val score = frequencyScore * indexScore
 
+      total += score
+
       attributes += (key -> score)
     }
 
-    attributes.filter(_._2 > 0)
+    attributes.filter(_._2 > 0).map {
+      case (key, value) => {
+        (key, value / total)
+      }
+    }
   }
 }

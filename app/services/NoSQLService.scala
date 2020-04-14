@@ -6,6 +6,7 @@ import scala.concurrent.Await
 import org.mongodb.scala._
 import org.mongodb.scala.model._
 import org.mongodb.scala.model.Filters._
+import org.mongodb.scala.model.Projections._
 import org.mongodb.scala.model.Sorts._
 import scala.concurrent.duration._
 
@@ -65,13 +66,26 @@ object NoSQLService {
     val options = ReplaceOptions().upsert(true)
 
     Await.result(positions().replaceOne(filter, document, options).toFuture(), timeout)
+
+    val find = equal("domain", position.domain)
+    val results = Await.result(companies().find(find).toFuture(), timeout)
+    val exists = !results.headOption.isEmpty
+
+    if (!exists) {
+      val company = new Company(None, position.domain, None)
+
+      writeCompany(company)
+    }
   }
 
   def findPositions(): Vector[Position] = {
     val sort = ascending("domain")
-    val documents = Await.result(positions().find().sort(sort).toFuture(), timeout)
+    val projection = exclude("text")
+    val documents = Await.result(positions().find().projection(projection).sort(sort).toFuture(), timeout)
 
-    Vector[Position]() ++ documents.map { document =>
+    Vector[Position]() ++ documents.map { partial =>
+      val document = partial + ("text" -> "")
+
       Position.toModel(document)
     }
   }
@@ -84,7 +98,7 @@ object NoSQLService {
   }
 
   def dropPosition(id: String): Unit = {
-    val query = equal("url", id)
+    val query = equal("_id", id)
 
     Await.result(positions().deleteOne(query).toFuture(), timeout)
   }

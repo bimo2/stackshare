@@ -11,7 +11,7 @@ class UsersController(val controllerComponents: ControllerComponents)
   def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     try {
       val users = NoSQLService.findUsers()
-      var attributes = Language.toDoubleMap()
+      var attributes = Language.getDoubleMapping()
 
       users.foreach { user =>
         for ((key, value) <- user.attributes) {
