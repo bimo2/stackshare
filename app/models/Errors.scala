@@ -2,7 +2,7 @@ package io.bimo2.stackshare
 
 object Errors {
 
-  val messages = Map(
+  private val messages = Map(
     400 -> "something was not understood",
     401 -> "something was not authorized",
     403 -> "something was not allowed",

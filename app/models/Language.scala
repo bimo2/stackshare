@@ -18,7 +18,7 @@ object Language {
     "sql" -> "SQL"
   )
 
-  val keywords = Map(
+  private val keywords = Map(
     "js" -> Seq("javascript", "typescript", "js", "node", "nodejs", "react", "angular"),
     "swift" -> Seq("swift", "ios", "xcode"),
     "go" -> Seq("go", "golang"),
