@@ -16,11 +16,56 @@ const encodeParams = (...values) => values
   .join('/');
 
 const onQueryChange = (query) => {
-  const button = document.getElementById("search_button");
+  const button = document.getElementById('search_button');
 
   button.innerText = query.startsWith('http://') || query.startsWith('https://') ?
     'Fetch' :
     'Search';
+};
+
+const onQuery = async () => {
+  const element = document.getElementById('query');
+  const url = element.value;
+  const [selector, ...array] = url.split(':');
+  const query = array.join(':')
+
+  switch (selector) {
+    case 'http':
+    case 'https':
+      document.getElementById('search_button').style.display = 'none';
+      document.getElementById('searching').style.display = 'block';
+
+      const data = { url };
+
+      if (data.url) {
+        let request = fetch(`${path}/positions`, {
+          method: 'POST',
+          headers: { ...content },
+          body: JSON.stringify(data)
+        });
+
+        let response = isOk(await request);
+        await response.json();
+
+        window.location.href = `${path}/positions`;
+      }
+
+      break;
+
+    case 'u':
+    case 'user':
+      window.location.href = `${path}/users/${query}`;
+      break;
+
+    case 'c':
+    case 'company':
+      window.location.href = `${path}/companies/${query}`;
+      break;
+
+    default:
+      element.value = '';
+      return
+  }
 };
 
 const onCreateUser = async () => {
@@ -51,8 +96,6 @@ const onCreateUser = async () => {
 
     window.location.href = `${path}/users/${json.username}`;
   }
-
-  return false;
 };
 
 const onDestroyUser = async (username) => {
@@ -85,6 +128,4 @@ const onCreateCompany = async () => {
 
     window.location.href = `${path}/companies/${json.domain}`;
   }
-
-  return false;
 };

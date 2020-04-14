@@ -14,8 +14,9 @@
         <div class="content">
           <h1 class="stackshare"><a href="/"><span>stack</span>share</a></h1>
           <form class="search">
-            <input type="text" placeholder="URL or query" oninput="onQueryChange(this.value)" />
-            <button id="search_button">Search</button>
+            <input id="query" type="text" placeholder="URL or query" oninput="onQueryChange(this.value)" />
+            <button id="search_button" onclick="onQuery(); return false;">Search</button>
+            <button id="searching" onclick="return false;"><img src="@routes.Assets.versioned("loading.svg")" alt="loading" /></button>
           </form>
           <div class="pages">
             <nav><a href="/companies"><img src="@routes.Assets.versioned("companies.svg")" alt="companies" /></a></nav>

@@ -263,6 +263,11 @@ header > .content {
   padding: 0;
 }
 
+.search #searching {
+  display: none;
+  margin-bottom: -4px;
+}
+
 .pages {
   height: 38px;
   justify-content: flex-end;
