@@ -27,8 +27,11 @@ class PositionsController(val controllerComponents: ControllerComponents)
       val url = Url.parse((json \ "url").as[String])
       val domain = url.apexDomain.get
       val content = WebContentService.fetchSeq(url.toString)
+      val title = content._1.getOrElse("")
+      val description = content._2.getOrElse("")
       val text = content._3.mkString(" ")
-      val position = new Position(None, url.toString, text, content._1, content._2, domain, Map[String, Int]())
+      val attributes = Language.frequencyAnalysis(title, description, content._3)
+      val position = new Position(None, url.toString, text, content._1, content._2, domain, attributes)
 
       NoSQLService.writePosition(position)
 

@@ -45,7 +45,7 @@ object WebContentService {
   }
 
   private def redactSeq(text: String): Seq[String] = {
-    text.toLowerCase().replaceAll("(\\.|,|/|!|\\?|;)", " ").trim().split("\\s+")
+    text.toLowerCase().replaceAll("(\\.|,|/|!|\\?|;|\\(|\\))", " ").trim().split("\\s+")
   }
 
   private def redactText(text: String): String = {

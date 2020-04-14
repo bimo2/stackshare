@@ -1,5 +1,7 @@
 package io.bimo2.stackshare
 
+import scala.util.control.Breaks._
+
 object Language {
 
   val mapping = Map(
@@ -35,6 +37,44 @@ object Language {
   )
 
   def toDoubleMap(): Map[String, Double] = {
-    Map(mapping.keySet.toSeq.map((_, 0.0)): _*)
+    Map(mapping.keySet.toSeq.map((_, 0.toDouble)): _*)
+  }
+
+  def frequencyAnalysis(title: String, description: String, text: Seq[String]): Map[String, Double] = {
+    val titleSeq = title.split("\\s+")
+    val descriptionSeq = description.split("\\s+")
+    val content = titleSeq ++: descriptionSeq ++: text
+    var frequencies = Map(mapping.keySet.toSeq.map((_, Seq[Int]())): _*)
+
+    var i = 0
+    var count = 0
+
+    for (term <- content) {
+      breakable {
+        for ((key, seq) <- keywords) {
+          if (seq.contains(term)) {
+            val nextSeq = frequencies(key) :+ i
+            frequencies = frequencies.updated(key, nextSeq)
+            count += 1
+
+            break
+          }
+        }
+      }
+
+      i += 1
+    }
+
+    var attributes = Map[String, Double]()
+
+    for ((key, seq) <- frequencies) {
+      val frequencyScore = seq.length / count.toDouble
+      val indexScore = seq.map(content.length - _).sum
+      val score = frequencyScore * indexScore
+
+      attributes += (key -> score)
+    }
+
+    attributes.filter(_._2 > 0)
   }
 }

@@ -5,7 +5,7 @@ import org.mongodb.scala.Document
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
 
-class Position(val id: Option[String], val url: String, val text: String, var title: Option[String], var description: Option[String], var domain: String, var attributes: Map[String, Int]) {
+class Position(val id: Option[String], val url: String, val text: String, var title: Option[String], var description: Option[String], var domain: String, var attributes: Map[String, Double]) {
 
   override def toString(): String = {
     val idOption = id.getOrElse(None)
@@ -39,10 +39,10 @@ object Position
     (JsPath \ "title").readNullable[String] and
     (JsPath \ "description").readNullable[String] and
     (JsPath \ "domain").read[String] and
-    (JsPath \ "attributes").read[Map[String, Int]]
+    (JsPath \ "attributes").read[Map[String, Double]]
   )(Position.apply _)
 
-  def apply(id: Option[String], url: String, text: String, title: Option[String], description: Option[String], domain: String, attributes: Map[String, Int]): Position = {
+  def apply(id: Option[String], url: String, text: String, title: Option[String], description: Option[String], domain: String, attributes: Map[String, Double]): Position = {
     new Position(id, url, text, title, description, domain, attributes)
   }
 
@@ -61,18 +61,15 @@ object Position
     val id = Option(document.get("_id").get.asObjectId().getValue().toString())
     val url = document.get("url").get.asString().getValue().toString()
     val text = document.get("text").get.asString().getValue().toString()
-
     val hasTitle = document("title").isString()
     val title = if (hasTitle) Option(document.get("title").get.asString().getValue().toString()) else None
-
     val hasDescription = document("description").isString()
     val description = if (hasDescription) Option(document.get("description").get.asString().getValue().toString()) else None
-
     val domain = document.get("domain").get.asString().getValue().toString()
     val attributesBson = Document(document.get("attributes").get.asDocument())
 
     val attributesSequence = attributesBson.toSeq.map { attribute =>
-      attribute._1 -> attribute._2.asInt32().getValue()
+      attribute._1 -> attribute._2.asDouble().getValue()
     }
 
     val attributes = Map(attributesSequence: _*)
