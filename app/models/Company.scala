@@ -48,6 +48,7 @@ object Company
   def toModel(document: Document): Company = {
     val id = Option(document.get("_id").get.asObjectId().getValue().toString())
     val domain = document.get("domain").get.asString().getValue().toString()
+
     val hasName = document("name").isString()
     val name = if (hasName) Option(document.get("name").get.asString().getValue().toString()) else None
 

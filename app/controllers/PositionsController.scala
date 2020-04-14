@@ -1,5 +1,7 @@
 package io.bimo2.stackshare
 
+import io.lemonlabs.uri.Url
+
 import play.api.libs.json._
 import play.api.mvc._
 
@@ -22,9 +24,15 @@ class PositionsController(val controllerComponents: ControllerComponents)
   def create(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     try {
       val json = request.body.asJson.get
-      val url = (json \ "url").as[String]
-      val text = WebContentService.fetchSeq(url)
-      val response = Json.toJson(text)
+      val url = Url.parse((json \ "url").as[String])
+      val domain = url.apexDomain.get
+      val content = WebContentService.fetchSeq(url.toString)
+      val text = content._3.mkString(" ")
+      val position = new Position(None, url.toString, text, content._1, content._2, domain, Map[String, Int]())
+
+      NoSQLService.writePosition(position)
+
+      val response = Json.toJson(position)
 
       Ok(response)
     }
