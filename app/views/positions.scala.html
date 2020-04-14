@@ -1,13 +1,19 @@
 @import io.bimo2.stackshare.Position
+@import io.bimo2.stackshare.Language
 
-@(positions: Vector[Position])
+@(positions: Vector[Position], popular: Vector[(String, Double)])
 
-@main("Companies") {
+@main("Positions") {
   <div class="card">
     <h1>Positions</h1>
     @if(positions.length > 0) {
       <h2 class="space_above">Popular Attributes</h2>
     }
+    <div class="attribute_list less_space_above">
+      @for((key, value) <- popular) {
+        <div class="circle"><span class="@key"></span>@Language.mapping(key) &rarr; @{f"${100 * value}%.2f"}%</div>
+      }
+    </div>
   </div>
   <div class="card more_space_above">
     @if(positions.length > 0) {
@@ -15,15 +21,20 @@
         <tbody>
           @for(position <- positions) {
             <tr>
-              <td>@position.id</td>
-              <td><a href="/positions/@position.id">@position.domain</a></td>
-              <td>@position.title</td>
+              <td width="20%">@position.id</td>
+              <td class="attention" width="25%"><a href="/positions/@position.id">@position.domain</a></td>
+              <td width="40%">@position.title</td>
+              @for((key, value) <- position.attributes) {
+                <td class="attention" width="5%">
+                  <div class="table_attribute circle"><span class="@key"></span></div>
+                </td>
+              }
             </tr>
           }
         </tbody>
       </table>
     } else {
-      <div class="without_data">No positions.</div>
+      <div class="attention">No positions.</div>
     }
   </div>
 }

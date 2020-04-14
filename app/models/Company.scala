@@ -1,17 +1,43 @@
 package io.bimo2.stackshare
 
 import org.mongodb.scala.Document
+import scala.collection.immutable.ListMap
 
 import play.api.libs.functional.syntax._
 import play.api.libs.json._
 
-class Company(val id: Option[String], val domain: String, var name: Option[String]) {
+class Company(val id: Option[String], val domain: String, var name: Option[String], var stack: Option[Map[String, Double]] = None) {
 
   override def toString(): String = {
     val idOption = id.getOrElse(None)
     val nameOption = name.getOrElse(None)
 
     s"[Company] ($idOption) $domain: $name"
+  }
+
+  def calculateStack(positions: Vector[Position]): Map[String, Double] = {
+    var attributes = Language.getDoubleMapping()
+    var count = 0
+
+    positions.foreach { position =>
+      if (position.domain == domain) {
+        for ((key, value) <- position.attributes) {
+          attributes = attributes.updatedWith(key)(_.map(_ + value))
+        }
+
+        count += 1
+      }
+    }
+
+    val stackAverage = attributes.filter(_._2 > 0).map {
+      case (key, value) => {
+        (key, value / count)
+      }
+    }
+
+    stack = Option(stackAverage)
+
+    stack.get
   }
 }
 

@@ -24,10 +24,10 @@
         <tbody>
           @for(user <- users) {
             <tr>
-              <td>@user.id</td>
-              <td><a href="/users/@user.username">@user.username</a></td>
+              <td width="22%">@user.id</td>
+              <td class="attention" width="24%"><a href="/users/@user.username">@user.username</a></td>
               @for((key, value) <- user.attributes) {
-                <td>
+                <td width="18%">
                   <div class="circle"><span class="@key"></span>@Language.mapping(key) &rarr; @value</div>
                 </td>
               }
@@ -36,7 +36,7 @@
         </tbody>
       </table>
     } else {
-      <div class="without_data">No users.</div>
+      <div class="attention">No users.</div>
     }
   </div>
 }

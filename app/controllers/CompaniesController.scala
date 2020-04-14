@@ -1,5 +1,7 @@
 package io.bimo2.stackshare
 
+import scala.collection.immutable.ListMap
+
 import play.api.libs.json._
 import play.api.mvc._
 
@@ -9,8 +11,28 @@ class CompaniesController(val controllerComponents: ControllerComponents)
   def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     try {
       val companies = NoSQLService.findCompanies()
+      val positions = NoSQLService.findPositions()
+      var attributes = Language.getDoubleMapping()
 
-      Ok(views.html.companies(companies));
+      companies.foreach { company =>
+        company.calculateStack(positions)
+
+        val companyStack = company.stack.get.toSeq.sortWith(_._2 > _._2)
+        company.stack = Option(ListMap(companyStack: _*).filter(_._2 > 0).take(3))
+
+        for ((key, value) <- companyStack) {
+          attributes = attributes.updatedWith(key)(_.map(_ + value))
+        }
+      }
+
+      val popularMap = attributes.transform((key, value) => {
+        value / companies.length
+      })
+
+      val popularSequence = popularMap.toSeq.sortWith(_._2 > _._2)
+      val popular = Vector(popularSequence: _*).filter(_._2 > 0)
+
+      Ok(views.html.companies(companies, popular));
     }
     catch {
       case e: Exception => {

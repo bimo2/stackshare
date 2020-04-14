@@ -132,10 +132,19 @@ table {
 td {
   font-size: 0.95rem;
   font-weight: 300;
-  padding-top: 1.5rem;
+  max-width: 0;
+  overflow: hidden;
+  padding: 1.5rem 0 0 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
 
-.without_data {
+td .table_attribute {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.attention {
   font-weight: 300;
   text-align: center;
 }

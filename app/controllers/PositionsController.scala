@@ -1,6 +1,7 @@
 package io.bimo2.stackshare
 
 import io.lemonlabs.uri.Url
+import scala.collection.immutable.ListMap
 
 import play.api.libs.json._
 import play.api.mvc._
@@ -11,8 +12,25 @@ class PositionsController(val controllerComponents: ControllerComponents)
   def index(): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     try {
       val positions = NoSQLService.findPositions()
+      var attributes = Language.getDoubleMapping()
 
-      Ok(views.html.positions(positions));
+      positions.foreach { position =>
+        for ((key, value) <- position.attributes) {
+          attributes = attributes.updatedWith(key)(_.map(_ + value))
+        }
+
+        val positionAttributes = position.attributes.toSeq.sortWith(_._2 > _._2)
+        position.attributes = ListMap(positionAttributes: _*).filter(_._2 > 0).take(3)
+      }
+
+      val popularMap = attributes.transform((key, value) => {
+        value / positions.length
+      })
+
+      val popularSequence = popularMap.toSeq.sortWith(_._2 > _._2)
+      val popular = Vector(popularSequence: _*).filter(_._2 > 0)
+
+      Ok(views.html.positions(positions, popular));
     }
     catch {
       case e: Exception => {
