@@ -22,7 +22,7 @@ object Language {
   )
 
   private val keywords = Map(
-    "js" -> Seq("javascript", "typescript", "js", "node", "nodejs", "react", "angular"),
+    "js" -> Seq("javascript", "typescript", "js", "node", "nodejs", "react", "reactjs", "angular"),
     "swift" -> Seq("swift", "ios", "xcode"),
     "go" -> Seq("go", "golang"),
     "rb" -> Seq("ruby", "rails"),
@@ -32,7 +32,7 @@ object Language {
     "kt" -> Seq("kotlin", "android"),
     "cpp" -> Seq("c++", "c"),
     "m" -> Seq("objective-c"),
-    "cs" -> Seq("c#", ".net"),
+    "cs" -> Seq("c#", "net"),
     "php" -> Seq("php", "laravel"),
     "sql" -> Seq("sql", "mysql", "postgresql")
   )

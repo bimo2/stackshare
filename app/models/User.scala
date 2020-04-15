@@ -12,6 +12,25 @@ class User(val id: Option[String], val username: String, var attributes: Map[Str
 
     s"[User] ($idOption) $username"
   }
+
+  def suggestPositions(positions: Vector[Position], max: Int): Vector[(Position, Double)] = {
+    var results = Vector[(Position, Double)]()
+
+    val vector = attributes.map {
+      case (key, value) => {
+        (key, value.toDouble)
+      }
+    }
+
+    for (position <- positions) {
+      val score = Language.dotProduct(vector, position.attributes)
+      results = results :+ (position, score)
+    }
+
+    results = results.toSeq.filter(_._2 > 0).sortWith(_._2 > _._2)
+    
+    Vector[(Position, Double)]() ++ results.take(max)
+  }
 }
 
 object User

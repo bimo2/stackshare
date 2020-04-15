@@ -41,11 +41,18 @@ class UsersController(val controllerComponents: ControllerComponents)
   def show(id: String): Action[AnyContent] = Action { implicit request: Request[AnyContent] =>
     try {
       val user = NoSQLService.findUser(id)
+      val positions = NoSQLService.findPositions()
 
       val attributes = user.attributes.toSeq.sortWith(_._2 > _._2)
       user.attributes = ListMap(attributes: _*).filter(_._2 > 0)
+      val suggestions = user.suggestPositions(positions, 5)
 
-      Ok(views.html.user(user))
+      for (suggestion <- suggestions) {
+        val positionAttributes = suggestion._1.attributes.toSeq.sortWith(_._2 > _._2)
+        suggestion._1.attributes = ListMap(positionAttributes: _*).filter(_._2 > 0).take(3)
+      }
+
+      Ok(views.html.user(user, suggestions))
     }
     catch {
       case e: NoSuchElementException => {
