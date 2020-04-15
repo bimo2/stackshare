@@ -7,12 +7,15 @@ _stackshare_ is a predictive web system built in Scala for collecting and aggreg
 - `scala: ^2.13.1`
 - `sbt: ^1.3.9`
 - `java: ^11.0.6`
+- `mongodb: ^4.2.0`
 
 ## Build
 
 ```zsh
+# Start MongoDB on http://localhost:27017
+mongod --dbpath /usr/local/var/mongodb --logpath /usr/local/var/log/mongodb/mongo.log --fork
+
+# Compile and run Play project on http://localhost:9000
 sbt compile
 sbt run
 ```
-
-The application runs on `http://localhost:9000`.
